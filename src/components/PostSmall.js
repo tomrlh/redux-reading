@@ -24,9 +24,11 @@ export default class PostSmall extends React.Component {
 					<Item.Header as='a'>{p.title}</Item.Header>
 					<Item.Description>{p.body.slice(0, 500)}</Item.Description>
 					<Item.Extra>
-						<Icon color='green' name='check' style={{ marginRight: '15' }}/> {p.voteScore} votes
-						<Button size='mini' icon='thumbs up'/>
-						<Button size='mini' icon='thumbs down'/>
+						<Icon
+							color='green' 
+							name='check' 
+							style={{ marginRight: '15' }}/> 
+							{p.voteScore} votes
 					</Item.Extra>
 				</Item.Content>
 			</Item>
