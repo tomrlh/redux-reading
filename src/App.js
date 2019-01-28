@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Grid, Segment, Container } from 'semantic-ui-react'
+import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import './App.css'
+import PostSmall from './components/PostSmall'
 
 import axiosInstance from './utils/AxiosUtil'
 
@@ -27,7 +28,17 @@ class App extends Component {
 							{categories.map((c, idx) => <Segment key={idx}>{c.name}</Segment>)}
 						</Grid.Column>
 						<Grid.Column width={10}>
-							{posts.map((p, idx) => <Segment key={idx}>{p.title}</Segment>)}
+							<Item.Group divided>
+								{posts.map((p, idx) =>
+									<PostSmall
+										id={p.id}
+										title={p.title}
+										body={p.body}
+										category={p.category}
+										voteScore={p.voteScore}
+									/>
+								)}
+							</Item.Group>
 						</Grid.Column>
 					</Grid>
 				</Container>
