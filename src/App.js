@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import './App.css'
 import PostSmall from './components/PostSmall'
-
+import { connect } from 'react-redux'
 import axiosInstance from './utils/AxiosUtil'
 
 class App extends Component {
@@ -66,5 +66,7 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect(mapStateToProps)(App)
+
+
 
