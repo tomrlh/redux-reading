@@ -7,10 +7,7 @@ export const upVote = (id) => ({ type: UP_VOTE, id })
 
 export const downVote = (id) => ({ type: DOWN_VOTE, id })
 
-export const receivePosts = posts => ({
-	type: RECEIVE_POSTS,
-	posts
-})
+export const receivePosts = posts => ({ type: RECEIVE_POSTS, posts })
 
 export const fetchPosts = () => dispatch => (
   ApiUtil

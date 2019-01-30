@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import PostSmall from '../components/PostSmall'
 
-import { fetchPosts, receivePosts } from '../actions/posts'
+import { fetchPosts } from '../actions/posts'
+import { fetchCategories } from '../actions/categories'
 
 class Main extends React.Component {
 
@@ -36,6 +37,7 @@ class Main extends React.Component {
 
 	componentDidMount() {
 		this.props.dispatch(fetchPosts())
+		this.props.dispatch(fetchCategories())
 	}
 }
 
@@ -56,7 +58,7 @@ Main.defaultProps = {
 function mapStateToProps(state) {
 	return {
 		posts: state.posts.posts,
-		categories: state.posts.categories
+		categories: state.categories.categories
 	}
 }
 
