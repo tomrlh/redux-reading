@@ -9,14 +9,14 @@ export default class PostSmall extends React.Component {
 		return (
 			<Item>
 				<Item.Content>
-					<Item.Header as='a'>{post.title}</Item.Header>
+					<Item.Header as='a'>{this.props.title}</Item.Header>
 					<Item.Description>{post.body.slice(0, 500)}</Item.Description>
 					<Item.Extra>
 						<Icon
 							color='green' 
 							name='check' 
 							style={{ marginRight: '15' }}/> 
-							{post.voteScore} votes
+							{this.props.voteScore} votes
 					</Item.Extra>
 				</Item.Content>
 			</Item>

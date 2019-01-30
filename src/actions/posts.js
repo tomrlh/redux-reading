@@ -15,5 +15,6 @@ export const receivePosts = posts => ({
 export const fetchPosts = () => dispatch => (
   ApiUtil
       .fetchPosts()
-      .then(posts => dispatch(receivePosts(posts)))
-);
+      .then(posts => dispatch(receivePosts(posts.data)))
+      .catch(error => { console.log(error) })
+)

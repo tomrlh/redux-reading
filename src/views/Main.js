@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import PostSmall from '../components/PostSmall'
 
-import { fetchPosts } from '../actions/posts'
+import { fetchPosts, receivePosts } from '../actions/posts'
+
 class Main extends React.Component {
 
 	render() {
@@ -34,7 +35,7 @@ class Main extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log(fetchPosts())
+		this.props.dispatch(fetchPosts())
 	}
 }
 
