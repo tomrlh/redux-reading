@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import PostSmall from '../components/PostSmall'
 
+import { fetchPosts } from '../actions/posts'
 class Main extends React.Component {
 
 	render() {
@@ -16,7 +18,7 @@ class Main extends React.Component {
 						<Item.Group divided>
 							{this.props.posts.map((p, idx) =>
 								<PostSmall
-									key={p.id}
+									key={idx}
 									id={p.id}
 									title={p.title}
 									body={p.body}
@@ -30,6 +32,22 @@ class Main extends React.Component {
 			</Container>
 		);
 	}
+
+	componentDidMount() {
+		console.log(fetchPosts())
+	}
+}
+
+
+
+Main.propTypes = {
+	posts: PropTypes.array,
+	categories: PropTypes.array
+}
+
+Main.defaultProps = {
+	posts: [],
+	categories: []
 }
 
 
@@ -43,10 +61,10 @@ function mapStateToProps(state) {
 
 
 
-function mapDispatchToProps(dispatch) {
-	return {
-		getPosts: () => dispatch({type: 'GET_POSTS'})
-	}
-}
+// function mapDispatchToProps(dispatch) {
+// 	return {
+// 		getPosts: () => dispatch({type: 'GET_POSTS'})
+// 	}
+// }
 
 export default connect(mapStateToProps)(Main)

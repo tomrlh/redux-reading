@@ -4,7 +4,6 @@ var axiosInstance = axios.create({
   baseURL: `http://localhost:3001`
 })
 
-axiosInstance.defaults.headers.common['Authorization'] = 'reading-redux'
-
+axiosInstance.defaults.headers.common['Authorization'] = 'redux-reading'
 
 export default axiosInstance

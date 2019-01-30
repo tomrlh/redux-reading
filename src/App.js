@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { Item, Grid, Segment, Container } from 'semantic-ui-react'
 import './App.css'
-import PostSmall from './components/PostSmall'
 import { connect } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
