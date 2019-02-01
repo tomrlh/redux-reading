@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Item, Grid, Segment, Container } from 'semantic-ui-react'
+import { Container, Divider, Grid, Header, Icon, Item, List } from 'semantic-ui-react'
 import PostSmall from '../components/PostSmall'
+import PostsSorter from '../components/PostsSorter'
 
 import { fetchPosts } from '../actions/posts'
 import { fetchCategories } from '../actions/categories'
@@ -14,7 +15,23 @@ class Main extends React.Component {
 			<Container>
 				<Grid columns='equal'>
 					<Grid.Column>
-						{this.props.categories.map((c, idx) => <Segment key={idx}>{c.name}</Segment>)}
+						<PostsSorter />
+						<Divider />
+						<Header as='h3'>
+							<Icon name='list' />
+							<Header.Content>Categories</Header.Content>
+						</Header>
+						<List divided relaxed>
+							{this.props.categories.map((c, idx) => 
+								<List.Item key={idx}>
+									<List.Icon name='caret right' size='large' verticalAlign='middle' />
+									<List.Content>
+										<List.Header as='a'>{c.name}</List.Header>
+										<List.Description as='a'>{c.path}</List.Description>
+									</List.Content>
+								</List.Item>
+							)}
+						</List>
 					</Grid.Column>
 					<Grid.Column width={10}>
 						<Item.Group divided>
@@ -55,14 +72,12 @@ Main.defaultProps = {
 
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
 	return {
 		posts: state.posts.posts,
 		categories: state.categories.categories
 	}
 }
-
-
 
 function mapDispatchToProps(dispatch) {
 	return {
