@@ -36,8 +36,8 @@ class Main extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.dispatch(fetchPosts())
-		this.props.dispatch(fetchCategories())
+		this.props.getPosts()
+		this.props.getCategories()
 	}
 }
 
@@ -64,10 +64,11 @@ function mapStateToProps(state) {
 
 
 
-// function mapDispatchToProps(dispatch) {
-// 	return {
-// 		getPosts: () => dispatch({type: 'GET_POSTS'})
-// 	}
-// }
+function mapDispatchToProps(dispatch) {
+	return {
+		getPosts: () => dispatch(fetchPosts()),
+		getCategories: () => dispatch(fetchCategories())
+	}
+}
 
-export default connect(mapStateToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
