@@ -21,8 +21,18 @@ export const fetchPosts = () => dispatch => (
 	ApiUtil
 		.fetchPosts()
 		.then(posts => dispatch(receivePosts(posts.data)))
-		.catch(error => { console.log(error) })
+		.catch(error => {console.log(error)})
 )
+
+
+
+export const fetchPostsByCategory = (category) => dispatch => (
+	ApiUtil
+		.fetchPostsByCategory(category)
+		.then(posts => dispatch(receivePosts(posts.data)))
+		.catch(error => {console.log(error)})
+)
+
 
 
 export const fetchUpVote = (id) => dispatch => (
@@ -31,7 +41,7 @@ export const fetchUpVote = (id) => dispatch => (
 		.then(response => {
 			return dispatch(upVotePost(response.data.id))
 		})
-		.catch(error => { console.log(error) })
+		.catch(error => {console.log(error)})
 )
 
 
@@ -43,5 +53,5 @@ export const fetchDownVote = (id) => dispatch => (
 		.then(response => {
 			return dispatch(downVotePost(response.data.id))
 		})
-		.catch(error => { console.log(error) })
+		.catch(error => {console.log(error)})
 )

@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Container, Divider, Grid, Header, Icon, Item, List } from 'semantic-ui-react'
+import { Container, Divider, Grid, Item } from 'semantic-ui-react'
+import Categories from '../components/Categories'
 import PostSmall from '../components/PostSmall'
 import PostsSorter from '../components/PostsSorter'
 
@@ -15,23 +16,9 @@ class Main extends React.Component {
 			<Container>
 				<Grid columns='equal'>
 					<Grid.Column>
-						<PostsSorter />
-						<Divider />
-						<Header as='h3'>
-							<Icon name='list' />
-							<Header.Content>Categories</Header.Content>
-						</Header>
-						<List divided relaxed>
-							{this.props.categories.map((c, idx) => 
-								<List.Item key={idx}>
-									<List.Icon name='caret right' size='large' verticalAlign='middle' />
-									<List.Content>
-										<List.Header as='a'>{c.name}</List.Header>
-										<List.Description as='a'>{c.path}</List.Description>
-									</List.Content>
-								</List.Item>
-							)}
-						</List>
+						<PostsSorter/>
+						<Divider/>
+						<Categories categories={this.props.categories}/>
 					</Grid.Column>
 					<Grid.Column width={10}>
 						<Item.Group divided>
