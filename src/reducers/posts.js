@@ -38,11 +38,9 @@ export default function posts(state={}, action) {
 		case SORT_BY_VOTES:
 			return {
 				...state,
-				posts: state.posts.sort((a, b) => a.voteScore - b.voteScore)
+				posts: state.posts.sort((a, b) => b.voteScore - a.voteScore)
 			}
 		case SORT_BY_TITLE:
-		console.log('SORT_BY_TITLE reducer')
-		console.log(state.posts.sort((a, b) => b.title > a.title))
 			return {
 				...state,
 				posts: state.posts.sort((a, b) => {

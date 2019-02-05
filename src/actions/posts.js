@@ -30,8 +30,8 @@ export const fetchPostsByCategory = (category) => dispatch => (
 	ApiUtil
 		.fetchPostsByCategory(category)
 		.then(posts => dispatch(receivePosts(posts.data)))
-		.catch(error => {console.log(error)})
-)
+		.catch(error => {console.log(error)}
+))
 
 
 

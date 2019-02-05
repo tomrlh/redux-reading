@@ -7,27 +7,28 @@ import { fetchUpVote, fetchDownVote } from '../actions/posts'
 class PostSmall extends React.Component {
 
 	render() {
+		let post = this.props.post
 		return (
 			<Item>
 				<Item.Content>
-					<Item.Header as='a'>{this.props.title}</Item.Header>
-					<Item.Description>{this.props.body.slice(0, 500)}</Item.Description>
+					<Item.Header as='a'>{post.title}</Item.Header>
+					<Item.Description>{post.body.slice(0, 500)}</Item.Description>
 					<Item.Extra>
 						<Icon color='green' name='check'/>
-						{this.props.voteScore} votes
+						{post.voteScore} votes
 						<Button.Group style={{ marginLeft: 10 }}>
 							<Button
 								size='mini' 
 								color='green' 
 								icon='thumbs up' 
-								onClick={() => {this.props.upVote(this.props.id)}}
+								onClick={() => {this.props.upVote(post.id)}}
 							/>
 							<Button.Or/>
 							<Button 
 								size='mini' 
 								color='orange' 
 								icon='thumbs down' 
-								onClick={() => {this.props.downVote(this.props.id)}}
+								onClick={() => {this.props.downVote(post.id)}}
 							/>
 						</Button.Group>
 					</Item.Extra>
@@ -38,15 +39,11 @@ class PostSmall extends React.Component {
 }
 
 PostSmall.propTypes = {
-	title: PropTypes.string.isRequired,
-	body: PropTypes.string.isRequired,
-	voteScore: PropTypes.number.isRequired
+	post: PropTypes.object.isRequired
 }
 
 PostSmall.defaultProps = {
-	title: '',
-	body: '',
-	voteScore: null
+	post: { title: '', body: '', voteScore: null }
 }
 
 

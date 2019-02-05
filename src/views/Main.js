@@ -23,14 +23,7 @@ class Main extends React.Component {
 					<Grid.Column width={10}>
 						<Item.Group divided>
 							{this.props.posts.map((p, idx) =>
-								<PostSmall
-									key={idx}
-									id={p.id}
-									title={p.title}
-									body={p.body}
-									category={p.category}
-									voteScore={p.voteScore}
-								/>
+								<PostSmall key={idx} post={p}/>
 							)}
 						</Item.Group>
 					</Grid.Column>
@@ -38,6 +31,8 @@ class Main extends React.Component {
 			</Container>
 		);
 	}
+
+
 
 	componentDidMount() {
 		this.props.getPosts()
@@ -59,7 +54,7 @@ Main.defaultProps = {
 
 
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 	return {
 		posts: state.posts.posts,
 		categories: state.categories.categories
