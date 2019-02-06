@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { sortByVotes, sortByTitle } from '../actions/posts'
+import { sortByVotes, sortByTitle, sortByDate } from '../actions/posts'
 import { Button, Header, Icon } from 'semantic-ui-react'
 class PostsSorter extends Component {
 	render() {
@@ -17,7 +17,9 @@ class PostsSorter extends Component {
 					<Button size='mini' onClick={() => this.props.sortByTitle()}>
 						Title
 					</Button>
-					<Button size='mini'>Category</Button>
+					<Button size='mini' onClick={() => this.props.sortByDate()}>
+						Date
+					</Button>
 				</Button.Group>
 			</div>
 		)
@@ -30,6 +32,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		sortByVotes: () => dispatch(sortByVotes()),
 		sortByTitle: () => dispatch(sortByTitle()),
+		sortByDate: () => dispatch(sortByDate())
 	}
 }
 

@@ -29,6 +29,7 @@ class Main extends React.Component {
 									body={p.body}
 									category={p.category}
 									voteScore={p.voteScore}
+									timestamp={p.timestamp}
 								/>
 							)}
 						</Item.Group>

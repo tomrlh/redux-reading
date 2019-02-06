@@ -1,12 +1,18 @@
 import { 
 	UP_VOTE_POST, 
 	DOWN_VOTE_POST, 
+	GET_POST,
 	RECEIVE_POSTS,
 	SORT_BY_VOTES,
-	SORT_BY_TITLE
+	SORT_BY_TITLE,
+	SORT_BY_DATE
 } from '../actions/posts'
 
-export default function posts(state={}, action) {
+const INITIAL_STATE = {
+  posts: []
+}
+
+export default function posts(state=INITIAL_STATE, action) {
 	switch(action.type) {
 		case UP_VOTE_POST:
 			return {
@@ -48,6 +54,11 @@ export default function posts(state={}, action) {
 					if (a.title < b.title)return -1
 					return 0
 				})
+			}
+		case SORT_BY_DATE:
+			return {
+				...state,
+				posts: [...state.posts].sort((a, b) => b.timestamp - a.timestamp)
 			}
 		default:
 			return state

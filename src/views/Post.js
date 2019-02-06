@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Container, Header } from 'semantic-ui-react'
+import { Container, Comment, Divider, Header, Icon } from 'semantic-ui-react'
+import PostComment from '../components/PostComment'
 
 import { fetchPosts } from '../actions/posts'
 
 class Post extends Component {
 	render() {
-		let post = this.props.post
+		let formatedDate = new Date(this.props.post.timestamp).toLocaleDateString('pt-BR')
+
 		return (
 			<Container text>
-				<Header as='h2'>{post.title}</Header>
-				
-				<p>{post.body}</p>
-
-				autor, data
-
-				editar e remover postagem
-
-				listar comentários
-
-				adicionar editar e remover comentário
+				<Header as='h5' textAlign='right'></Header>
+				<Header as='h2'>{this.props.post.title}</Header>
+				<span>
+					<Icon name='user' /> {this.props.post.author} |
+				 	<Icon name='calendar alternate' />{formatedDate}
+				 </span>
+				<Divider />
+				<p>{this.props.post.body}</p>
+				<Divider />
+				<Icon size='large' name='thumbs up' /> {this.props.post.voteScore}
 			</Container>
 		);
 	}
@@ -45,4 +46,12 @@ Post.defaultProps = {
 
 
 
-export default connect(null)(Post)
+function mapStateToProps(state, ownProps) {
+	return {
+		post: state.posts.posts.find(p => p.id === ownProps.match.params.id)
+	}
+}
+
+
+
+export default connect(mapStateToProps)(Post)
