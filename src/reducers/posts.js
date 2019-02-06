@@ -11,7 +11,7 @@ export default function posts(state={}, action) {
 		case UP_VOTE_POST:
 			return {
 				...state,
-				posts: state.posts.map(post => {
+				posts: [...state.posts].map(post => {
 					if(post.id === action.id) {
 						post.voteScore += 1
 						return post
@@ -22,7 +22,7 @@ export default function posts(state={}, action) {
 		case DOWN_VOTE_POST:
 			return {
 				...state,
-				posts: state.posts.map(post => {
+				posts: [...state.posts].map(post => {
 					if(post.id === action.id) {
 						post.voteScore -= 1
 						return post
@@ -38,12 +38,12 @@ export default function posts(state={}, action) {
 		case SORT_BY_VOTES:
 			return {
 				...state,
-				posts: state.posts.sort((a, b) => b.voteScore - a.voteScore)
+				posts: [...state.posts].sort((a, b) => b.voteScore - a.voteScore)
 			}
 		case SORT_BY_TITLE:
 			return {
 				...state,
-				posts: state.posts.sort((a, b) => {
+				posts: [...state.posts].sort((a, b) => {
 					if (a.title > b.title) return 1
 					if (a.title < b.title)return -1
 					return 0

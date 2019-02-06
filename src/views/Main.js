@@ -15,7 +15,7 @@ class Main extends React.Component {
 		return (
 			<Container>
 				<Grid columns='equal'>
-					<Grid.Column>
+					<Grid.Column width={4}>
 						<PostsSorter/>
 						<Divider/>
 						<Categories categories={this.props.categories}/>
@@ -23,10 +23,17 @@ class Main extends React.Component {
 					<Grid.Column width={10}>
 						<Item.Group divided>
 							{this.props.posts.map((p, idx) =>
-								<PostSmall key={idx} post={p}/>
+								<PostSmall key={idx}
+									id={p.id}
+									title={p.title}
+									body={p.body}
+									category={p.category}
+									voteScore={p.voteScore}
+								/>
 							)}
 						</Item.Group>
 					</Grid.Column>
+					<Grid.Column width={2}></Grid.Column>
 				</Grid>
 			</Container>
 		);
