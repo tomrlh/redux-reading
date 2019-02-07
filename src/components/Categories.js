@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts, fetchPostsByCategory } from '../actions/posts'
-import { Header, Icon, Menu } from 'semantic-ui-react'
+import { Label, Header, Icon, Menu } from 'semantic-ui-react'
 
 class Categories extends Component {
 	state = {activeItem: 'all'}
 
 	handleItemClick = (name) => this.setState({ activeItem: name })
+
+	filterPostsByCategory = (categoryName) => {
+		return this.props.allPosts.filter((p) => p.category === categoryName)
+	}
 
 	render() {
 		return (
@@ -23,7 +27,9 @@ class Categories extends Component {
 							this.handleItemClick('all')
 							this.props.getPosts()
 						}} 
-					/>
+					>
+						<Label color='teal'>{this.props.allPosts.length}</Label>All
+					</Menu.Item>
 					{this.props.categories.map((c, idx) => 
 						<Menu.Item
 							key={idx} name={c.name}
@@ -32,11 +38,24 @@ class Categories extends Component {
 								this.handleItemClick(c.name)
 								this.props.getPostsByCategory(c.name)
 							}}
-						/>
+						>
+							<Label color='teal'>
+								{this.filterPostsByCategory(c.name).length}
+							</Label>
+							{c.name.charAt(0).toUpperCase() + c.name.slice(1)}
+						</Menu.Item>
 					)}
 				</Menu>
 			</div>
 		);
+	}
+}
+
+
+
+function mapStateToProps(state) {
+	return {
+		allPosts: state.posts.allPosts
 	}
 }
 
@@ -49,4 +68,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)

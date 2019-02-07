@@ -43,7 +43,7 @@ class Main extends React.Component {
 
 
 	componentDidMount() {
-		this.props.getPosts()
+		this.props.fetchPosts()
 		this.props.getCategories()
 	}
 }
@@ -64,14 +64,14 @@ Main.defaultProps = {
 
 function mapStateToProps(state) {
 	return {
-		posts: state.posts.posts,
+		posts: state.posts.allPosts,
 		categories: state.categories.categories
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getPosts: () => dispatch(fetchPosts()),
+		fetchPosts: () => dispatch(fetchPosts()),
 		getCategories: () => dispatch(fetchCategories())
 	}
 }

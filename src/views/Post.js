@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 import { Container, Divider, Header, Icon } from 'semantic-ui-react'
 import PostComments from '../components/PostComments'
 
-import { fetchPosts } from '../actions/posts'
-import { fetchPostComments } from '../actions/comments'
+import { fetchPost } from '../actions/posts'
 
 class Post extends Component {
 	render() {
@@ -25,22 +24,25 @@ class Post extends Component {
 				<Divider />
 				<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {post.voteScore}
 
-				<br/>
-				<br/>
-
-				<PostComments postComments={this.props.postComments}/>
+				<PostComments parentId={this.props.match.params.id}/>
 			</Container>
 		);
 	}
 
 
+	componentDidUpdate(prevProps){
+		if(this.props.match.params.id !== prevProps.match.params.id){
+			this.props.fetchPost(this.props.match.params.id)
+			this.props.fetchPostsComments(this.props.match.params.id)
+		}
+	}
+
+
 
 	componentDidMount() {
-		this.props.dispatch(fetchPosts())
-		this.props.dispatch(fetchPostComments(this.props.match.params.id))
+		this.props.fetchPost(this.props.match.params.id)
 	}
 }
-
 
 
 
@@ -49,18 +51,24 @@ Post.propTypes = {
 }
 
 Post.defaultProps = {
-	post: { title: '', body: '', voteScore: null }
+	post: { title: '', body: '', voteScore: null, parentId: '' }
 }
 
 
 
 function mapStateToProps(state, ownProps) {
 	return {
-		post: state.posts.posts.find(p => p.id === ownProps.match.params.id),
+		post: state.posts.postDetail,
 		postComments: state.comments.postComments
 	}
 }
 
 
 
-export default connect(mapStateToProps)(Post)
+function mapDispatchToProps(dispatch) {
+	return {
+		fetchPost: (id) => dispatch(fetchPost(id))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

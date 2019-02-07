@@ -2,13 +2,15 @@ import {
 	UP_VOTE_POST,
 	DOWN_VOTE_POST,
 	SET_POSTS,
+	SET_POST,
 	SORT_BY_VOTES,
 	SORT_BY_TITLE,
 	SORT_BY_DATE
 } from '../actions/posts'
 
 const INITIAL_STATE = {
-  posts: []
+  allPosts: [],
+  post: {}
 }
 
 export default function posts(state=INITIAL_STATE, action) {
@@ -16,7 +18,7 @@ export default function posts(state=INITIAL_STATE, action) {
 		case UP_VOTE_POST:
 			return {
 				...state,
-				posts: [...state.posts].map(post => {
+				allPosts: [...state.posts].map(post => {
 					if(post.id === action.id) {
 						post.voteScore += 1
 						return post
@@ -27,7 +29,7 @@ export default function posts(state=INITIAL_STATE, action) {
 		case DOWN_VOTE_POST:
 			return {
 				...state,
-				posts: [...state.posts].map(post => {
+				allPosts: [...state.posts].map(post => {
 					if(post.id === action.id) {
 						post.voteScore -= 1
 						return post
@@ -38,17 +40,22 @@ export default function posts(state=INITIAL_STATE, action) {
 		case SET_POSTS:
 			return {
 				...state,
-				posts: action.posts
+				allPosts: action.posts
+			}
+		case SET_POST:
+			return {
+				...state,
+				postDetail: action.post
 			}
 		case SORT_BY_VOTES:
 			return {
 				...state,
-				posts: [...state.posts].sort((a, b) => b.voteScore - a.voteScore)
+				allPosts: [...state.posts].sort((a, b) => b.voteScore - a.voteScore)
 			}
 		case SORT_BY_TITLE:
 			return {
 				...state,
-				posts: [...state.posts].sort((a, b) => {
+				allPosts: [...state.posts].sort((a, b) => {
 					if (a.title > b.title) return 1
 					if (a.title < b.title)return -1
 					return 0
@@ -57,7 +64,7 @@ export default function posts(state=INITIAL_STATE, action) {
 		case SORT_BY_DATE:
 			return {
 				...state,
-				posts: [...state.posts].sort((a, b) => b.timestamp - a.timestamp)
+				allPosts: [...state.posts].sort((a, b) => b.timestamp - a.timestamp)
 			}
 		default:
 			return state
