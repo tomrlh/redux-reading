@@ -5,6 +5,7 @@ import { Container, Comment, Divider, Header, Icon } from 'semantic-ui-react'
 import PostComment from '../components/PostComment'
 
 import { fetchPosts } from '../actions/posts'
+import { fetchPostComments } from '../actions/comments'
 
 class Post extends Component {
 	render() {
@@ -22,6 +23,20 @@ class Post extends Component {
 				<p>{this.props.post.body}</p>
 				<Divider />
 				<Icon size='large' name='thumbs up' /> {this.props.post.voteScore}
+
+				<br/>
+				<br/>
+
+				<Comment.Group>
+					{this.props.postComments.map(c =>
+						<PostComment
+							key={c.id}
+							author={c.author}
+							body={c.body}
+							timestamp={c.timestamp}
+						/>
+					)}
+				</Comment.Group>
 			</Container>
 		);
 	}
@@ -30,6 +45,7 @@ class Post extends Component {
 
 	componentDidMount() {
 		this.props.dispatch(fetchPosts())
+		this.props.dispatch(fetchPostComments(this.props.match.params.id))
 	}
 }
 
@@ -47,8 +63,12 @@ Post.defaultProps = {
 
 
 function mapStateToProps(state, ownProps) {
+	console.log(state);
+	console.log(state.posts);
+	console.log(state.comments);
 	return {
-		post: state.posts.posts.find(p => p.id === ownProps.match.params.id)
+		post: state.posts.posts.find(p => p.id === ownProps.match.params.id),
+		postComments: state.comments.postComments
 	}
 }
 

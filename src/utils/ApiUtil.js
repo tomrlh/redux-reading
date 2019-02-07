@@ -9,3 +9,6 @@ export const fetchCategories = () => axiosInstance.get('/categories')
 export const fetchUpVote = (id) => axiosInstance.post(`/posts/${id}`, {'option': 'upVote'})
 
 export const fetchDownVote = (id) => axiosInstance.post(`/posts/${id}`, {'option': 'downVote'})
+
+export const fetchPostComments = (id) => axiosInstance.get(`/posts/${id}/comments`)
+

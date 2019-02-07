@@ -1,8 +1,7 @@
-import { 
-	UP_VOTE_POST, 
-	DOWN_VOTE_POST, 
-	GET_POST,
-	RECEIVE_POSTS,
+import {
+	UP_VOTE_POST,
+	DOWN_VOTE_POST,
+	SET_POSTS,
 	SORT_BY_VOTES,
 	SORT_BY_TITLE,
 	SORT_BY_DATE
@@ -36,7 +35,7 @@ export default function posts(state=INITIAL_STATE, action) {
 					else return post
 				})
 			}
-		case RECEIVE_POSTS:
+		case SET_POSTS:
 			return {
 				...state,
 				posts: action.posts

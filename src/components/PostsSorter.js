@@ -12,13 +12,13 @@ class PostsSorter extends Component {
 				</Header>
 				<Button.Group>
 					<Button size='mini' onClick={() => this.props.sortByVotes()}>
-						Votes
+						<Icon name='thumbs up'/>
 					</Button>
 					<Button size='mini' onClick={() => this.props.sortByTitle()}>
-						Title
+						<Icon name='text height'/>
 					</Button>
 					<Button size='mini' onClick={() => this.props.sortByDate()}>
-						Date
+						<Icon name='calendar'/>
 					</Button>
 				</Button.Group>
 			</div>
