@@ -23,7 +23,7 @@ class Post extends Component {
 				<p>{post.body}</p>
 				<Divider />
 				<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {post.voteScore}
-
+				<br/><br/>
 				<PostComments parentId={this.props.match.params.id}/>
 			</Container>
 		);

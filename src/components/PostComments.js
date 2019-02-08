@@ -1,46 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Button, Comment, Form, Header, Icon, Input, Modal } from 'semantic-ui-react'
+import { Comment, Header, Icon } from 'semantic-ui-react'
 import { fetchPostComments, addComment, deleteComment } from '../actions/comments'
 import CommentForm from './CommentForm'
+import EditCommentModal from './EditCommentModal'
 
 class PostComments extends Component {
 	state = {
 		isEditing: false,
-		body: '',
-		author: '',
+		isSavingComment: false,
 		commentToEdit: {},
-		parentId: '',
-		timestamp: 0,
-
+		author: '',
+		body: ''
 	}
 
-	show = (comment) => this.setState({ isEditing: true, commentToEdit: comment })
+	show = (comment) => this.setState({
+		isEditing: true,
+		commentToEdit: comment,
+		author: comment.author,
+		body: comment.body
+	})
 
 	close = () => this.setState({ isEditing: false })
-
-	formatAndEditComment = (id) => {
-		let comment = this.state
-
-		if(comment.author.length === 0) {
-			this.setState({hideAuthorAlert: false})
-			return
-		} else this.setState({hideAuthorAlert: true})
-		if(comment.body.length === 0) {
-			this.setState({hideBodyAlert: false})
-			return
-		} else this.setState({hideBodyAlert: true})
-
-		comment.timestamp = new Date().getTime()
-		comment.parentId = this.props.parentId
-		comment.id = id
-		comment.author = this.state.author
-		comment.body = this.state.body
-
-		this.props.addComment(comment)
-	}
-
 
 	render() {
 		return (
@@ -50,8 +32,8 @@ class PostComments extends Component {
 						Comments
 					</Header>
 					{this.props.postComments.length > 0 ? (
-						this.props.postComments.map(c =>
-						<Comment key={c.id}>
+						this.props.postComments.map((c, idx) =>
+						<Comment key={idx}>
 							<Comment.Content>
 								<Comment.Author as='a'>{c.author}</Comment.Author>
 
@@ -87,32 +69,12 @@ class PostComments extends Component {
 				/>
 
 
-				<Modal size='small' open={this.state.isEditing} onClose={() => {this.close()}}>
-					<Modal.Header>Editing comment</Modal.Header>
-					<Modal.Content>
-						<Form>
-							<Input
-								icon='user' iconPosition='left'
-								placeholder='Your name...' style={{marginBottom: '5px'}}
-								onChange={(e, { value }) => this.setState({author: value})}
-							/>
-							<br/>
-							<Form.TextArea placeholder='Type something...'
-								value={this.state.body}
-								onChange={(e, { value }) => this.setState({body: value})}
-							/>
-						</Form>
-					</Modal.Content>
-					<Modal.Actions>
-						<Button negative icon='close' content='Close'/>
-						<Button
-							positive icon='checkmark'
-							labelPosition='right'
-							content='Save'
-							onClick={() => {this.formatAndEditComment(this.state.commentToEditId)}}
-						/>
-					</Modal.Actions>
-				</Modal>
+				<EditCommentModal
+					openFlag={this.state.isEditing}
+					closeFunction={this.close}
+					addComment={this.props.addComment}
+					comment={this.state.commentToEdit}
+				/>
 			</div>
 		)
 	}
