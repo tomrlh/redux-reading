@@ -1,23 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
-
-import { fetchPostComments, addComment } from '../actions/comments'
+import { Comment, Header, Icon } from 'semantic-ui-react'
+import { fetchPostComments, addComment, deleteComment } from '../actions/comments'
+import CommentForm from './CommentForm'
 
 class PostComments extends Component {
-	initialState = () => {
-		return {
-			id: '1231232',
-			timestamp: 123456789,
-			body: '',
-			author: '',
-			parentId: this.props.parentId
-		}
-	}
-
-	state = this.initialState()
-
 	render() {
 		return (
 			<div>
@@ -38,7 +26,14 @@ class PostComments extends Component {
 								<Comment.Text>{c.body}</Comment.Text>
 
 								<Comment.Actions>
-									<Comment.Action>Reply</Comment.Action>
+									<Comment.Action>
+										<Icon name='edit' />
+										Edit
+									</Comment.Action>
+									<Comment.Action onClick={() => {this.props.deleteComment(c.id)}}>
+										<Icon name='trash alternate outline' />
+										Delete
+									</Comment.Action>
 								</Comment.Actions>
 							</Comment.Content>
 						</Comment>
@@ -47,14 +42,11 @@ class PostComments extends Component {
 					)}
 				</Comment.Group>
 
-				<Form reply>
-					<Form.TextArea onChange={(e, { value }) => this.setState({body: value})}/>
-					<Button
-						content='Add Comment' icon='edit'
-						labelPosition='left' primary
-						onClick={() => {this.props.addComment(this.state)}}
-					/>
-				</Form>
+				<CommentForm
+					parentId={this.props.parentId}
+					addComment={this.props.addComment}
+					deleteComment={this.props.deleteComment}
+				/>
 			</div>
 		)
 	}
@@ -79,9 +71,9 @@ PostComments.defaultProps = {
 
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
 	return {
-		postComments: state.comments.postComments
+		postComments: state.comments.postComments.filter((c) => c.deleted === false)
 	}
 }
 
@@ -90,7 +82,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchPostComments: (id) => dispatch(fetchPostComments(id)),
-		addComment: (comment) => dispatch(addComment(comment))
+		addComment: (comment) => dispatch(addComment(comment)),
+		deleteComment: (id) => dispatch(deleteComment(id))
 	}
 }
 

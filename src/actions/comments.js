@@ -26,3 +26,12 @@ export const addComment = (comment) => dispatch => (
 		.then(response => dispatch(fetchPostComments(response.data.parentId)))
 		.catch(error => {console.log(error)})
 )
+
+
+
+export const deleteComment = (id) => dispatch => (
+	ApiUtil
+		.deleteComment(id)
+		.then(response => dispatch(fetchPostComments(response.data.parentId)))
+		.catch(error => {console.log(error)})
+)

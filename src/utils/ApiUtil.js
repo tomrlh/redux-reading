@@ -15,3 +15,5 @@ export const fetchDownVote = (id) => axiosInstance.post(`/posts/${id}`, {'option
 export const fetchPostComments = (id) => axiosInstance.get(`/posts/${id}/comments`)
 
 export const addComment = (comment) => axiosInstance.post(`/comments`, comment)
+
+export const deleteComment = (id) => axiosInstance.delete(`/comments/${id}`)
