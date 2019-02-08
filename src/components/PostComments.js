@@ -1,11 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Comment, Header, Icon } from 'semantic-ui-react'
+import { Button, Comment, Form, Header, Icon, Input, Modal } from 'semantic-ui-react'
 import { fetchPostComments, addComment, deleteComment } from '../actions/comments'
 import CommentForm from './CommentForm'
 
 class PostComments extends Component {
+	state = {
+		isEditing: false,
+		body: '',
+		author: '',
+		commentToEdit: {},
+		parentId: '',
+		timestamp: 0,
+
+	}
+
+	show = (comment) => this.setState({ isEditing: true, commentToEdit: comment })
+
+	close = () => this.setState({ isEditing: false })
+
+	formatAndEditComment = (id) => {
+		let comment = this.state
+
+		if(comment.author.length === 0) {
+			this.setState({hideAuthorAlert: false})
+			return
+		} else this.setState({hideAuthorAlert: true})
+		if(comment.body.length === 0) {
+			this.setState({hideBodyAlert: false})
+			return
+		} else this.setState({hideBodyAlert: true})
+
+		comment.timestamp = new Date().getTime()
+		comment.parentId = this.props.parentId
+		comment.id = id
+		comment.author = this.state.author
+		comment.body = this.state.body
+
+		this.props.addComment(comment)
+	}
+
+
 	render() {
 		return (
 			<div>
@@ -26,8 +62,8 @@ class PostComments extends Component {
 								<Comment.Text>{c.body}</Comment.Text>
 
 								<Comment.Actions>
-									<Comment.Action>
-										<Icon name='edit' />
+									<Comment.Action  onClick={() => {this.show(c)}}>
+										<Icon name='edit'/>
 										Edit
 									</Comment.Action>
 									<Comment.Action onClick={() => {this.props.deleteComment(c.id)}}>
@@ -42,11 +78,41 @@ class PostComments extends Component {
 					)}
 				</Comment.Group>
 
+
+
 				<CommentForm
 					parentId={this.props.parentId}
 					addComment={this.props.addComment}
 					deleteComment={this.props.deleteComment}
 				/>
+
+
+				<Modal size='small' open={this.state.isEditing} onClose={() => {this.close()}}>
+					<Modal.Header>Editing comment</Modal.Header>
+					<Modal.Content>
+						<Form>
+							<Input
+								icon='user' iconPosition='left'
+								placeholder='Your name...' style={{marginBottom: '5px'}}
+								onChange={(e, { value }) => this.setState({author: value})}
+							/>
+							<br/>
+							<Form.TextArea placeholder='Type something...'
+								value={this.state.body}
+								onChange={(e, { value }) => this.setState({body: value})}
+							/>
+						</Form>
+					</Modal.Content>
+					<Modal.Actions>
+						<Button negative icon='close' content='Close'/>
+						<Button
+							positive icon='checkmark'
+							labelPosition='right'
+							content='Save'
+							onClick={() => {this.formatAndEditComment(this.state.commentToEditId)}}
+						/>
+					</Modal.Actions>
+				</Modal>
 			</div>
 		)
 	}
