@@ -41,6 +41,15 @@ export const savePost = (post) => dispatch => (
 
 
 
+export const deletePost = (id) => dispatch => (
+	ApiUtil
+		.deletePost(id)
+		.then(response => dispatch(fetchPosts()))
+		.catch(error => {console.log(error)})
+)
+
+
+
 export const fetchPost = (id) => dispatch => (
 	ApiUtil
 		.fetchPost(id)

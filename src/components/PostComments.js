@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Comment, Header, Icon } from 'semantic-ui-react'
-import { fetchPostComments, addComment, deleteComment } from '../actions/comments'
+import { Comment, Header } from 'semantic-ui-react'
+import { fetchPostComments, saveComment, deleteComment } from '../actions/comments'
 import CommentForm from './CommentForm'
 import EditCommentModal from './EditCommentModal'
+import CommentControls from './CommentControls'
 
 class PostComments extends Component {
 	state = {
@@ -44,14 +45,11 @@ class PostComments extends Component {
 								<Comment.Text>{c.body}</Comment.Text>
 
 								<Comment.Actions>
-									<Comment.Action  onClick={() => {this.show(c)}}>
-										<Icon name='edit'/>
-										Edit
-									</Comment.Action>
-									<Comment.Action onClick={() => {this.props.deleteComment(c.id)}}>
-										<Icon name='trash alternate outline' />
-										Delete
-									</Comment.Action>
+									<CommentControls
+										comment={c}
+										editAction={this.show}
+										deleteAction={this.props.deleteComment}
+									/>
 								</Comment.Actions>
 							</Comment.Content>
 						</Comment>
@@ -64,7 +62,7 @@ class PostComments extends Component {
 
 				<CommentForm
 					parentId={this.props.parentId}
-					addComment={this.props.addComment}
+					saveComment={this.props.saveComment}
 					deleteComment={this.props.deleteComment}
 				/>
 
@@ -72,7 +70,7 @@ class PostComments extends Component {
 				<EditCommentModal
 					openFlag={this.state.isEditing}
 					closeFunction={this.close}
-					addComment={this.props.addComment}
+					saveComment={this.props.saveComment}
 					comment={this.state.commentToEdit}
 				/>
 			</div>
@@ -110,7 +108,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchPostComments: (id) => dispatch(fetchPostComments(id)),
-		addComment: (comment) => dispatch(addComment(comment)),
+		saveComment: (comment) => dispatch(saveComment(comment)),
 		deleteComment: (id) => dispatch(deleteComment(id))
 	}
 }

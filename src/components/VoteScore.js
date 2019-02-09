@@ -3,18 +3,18 @@ import { Button } from 'semantic-ui-react'
 
 
 const VoteScore = props => {
-	return <Button.Group style={{ marginLeft: 10 }}>
+	return <Button.Group floated='right'>
 				<Button
-					size='mini' 
-					color='green' 
-					icon='thumbs up' 
+					size='mini'
+					color='green'
+					icon='thumbs up'
 					onClick={() => {props.upVote(props.id)}}
 				/>
 				<Button.Or/>
 				<Button
-					size='mini' 
-					color='orange' 
-					icon='thumbs down' 
+					size='mini'
+					color='orange'
+					icon='thumbs down'
 					onClick={() => {props.downVote(props.id)}}
 				/>
 			</Button.Group>

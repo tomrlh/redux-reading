@@ -20,9 +20,9 @@ export const fetchPostComments = (id) => dispatch => (
 
 
 
-export const addComment = (comment) => dispatch => (
+export const saveComment = (comment) => dispatch => (
 	ApiUtil
-		.addComment(comment)
+		.saveComment(comment)
 		.then(response => dispatch(fetchPostComments(response.data.parentId)))
 		.catch(error => {console.log(error)})
 )
@@ -32,6 +32,6 @@ export const addComment = (comment) => dispatch => (
 export const deleteComment = (id) => dispatch => (
 	ApiUtil
 		.deleteComment(id)
-		.then(response => dispatch(fetchPostComments(response.data.parentId)))
+		.then(response => dispatch(fetchPostComments()))
 		.catch(error => {console.log(error)})
 )

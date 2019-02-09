@@ -2,43 +2,72 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Icon, Item } from 'semantic-ui-react'
-import { fetchUpVote, fetchDownVote } from '../actions/posts'
-import VoteScore from './VoteScore'
+import { Button, Divider, Icon, Item, Label, Segment } from 'semantic-ui-react'
+import { fetchUpVote, fetchDownVote, savePost, deletePost } from '../actions/posts'
+import PostControls from './PostControls'
 
 class PostSmall extends React.Component {
-
 	render() {
 		let formatedDate = new Date(this.props.timestamp).toLocaleDateString('pt-BR')
 		return (
-			<Item>
-				<Item.Content>
-					<Item.Header>
-						<Link to={`/post/${this.props.id}`}>
-							{this.props.title}
-						</Link>
-					</Item.Header>
-					<Item.Description>{this.props.body.slice(0, 500)}</Item.Description>
-						<Icon color='green' name='check'/>
-						{this.props.voteScore} votes
-						<VoteScore
+			<Segment raised>
+				<Label as='a' color='teal' ribbon='left'>
+					{formatedDate}
+				</Label>
+				<span>{this.props.title}</span>
+				<Link to={`/post/${this.props.id}`}>
+					<Button
+						floated='right' size='mini' color='blue'
+						icon labelPosition='right'>
+						See Details
+						<Icon name='arrow alternate circle right outline'/>
+					</Button>
+				</Link>
+				<Divider/>
+
+				<Item>
+					<Item.Content>
+						<Item.Meta></Item.Meta>
+						{this.props.body &&
+							<Item.Description>{this.props.body.slice(0, 500)}</Item.Description>
+						}
+
+						<Divider/>
+
+						<PostControls
 							id={this.props.id}
+							title={this.props.title}
+							body={this.props.body}
+							category={this.props.category}
+							voteScore={this.props.voteScore}
+							timestamp={this.props.timestamp}
+							deleteAction={this.props.deletePost}
 							upVote={this.props.upVote}
 							downVote={this.props.downVote}
 						/>
-					<Item.Extra>{formatedDate}</Item.Extra>
-				</Item.Content>
-			</Item>
+					</Item.Content>
+				</Item>
+			</Segment>
 		);
 	}
 }
 
 PostSmall.propTypes = {
-	post: PropTypes.object.isRequired
+	id: PropTypes.string,
+	title: PropTypes.string,
+	body: PropTypes.string,
+	category: PropTypes.string,
+	voteScore: PropTypes.number,
+	timestamp: PropTypes.number
 }
 
 PostSmall.defaultProps = {
-	post: { title: '', body: '', voteScore: null }
+	id: '',
+	title: '',
+	body: '',
+	category: '',
+	voteScore: 0,
+	timestamp: 0
 }
 
 
@@ -46,7 +75,9 @@ PostSmall.defaultProps = {
 function mapDispatchToProps(dispatch) {
 	return {
 		upVote: (id) => dispatch(fetchUpVote(id)),
-		downVote: (id) => dispatch(fetchDownVote(id))
+		downVote: (id) => dispatch(fetchDownVote(id)),
+		savePost: (post) => dispatch(savePost(post)),
+		deletePost: (id) => dispatch(deletePost(id))
 	}
 }
 

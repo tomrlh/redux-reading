@@ -6,6 +6,8 @@ export const fetchPost = (id) => axiosInstance.get(`/posts/${id}`)
 
 export const savePost = (post) => axiosInstance.post('/posts', post)
 
+export const deletePost = (id) => axiosInstance.delete(`/posts/${id}`)
+
 export const fetchPostsByCategory = (category) => axiosInstance.get(`/${category}/posts`)
 
 export const fetchCategories = () => axiosInstance.get('/categories')
@@ -16,6 +18,6 @@ export const fetchDownVote = (id) => axiosInstance.post(`/posts/${id}`, {'option
 
 export const fetchPostComments = (id) => axiosInstance.get(`/posts/${id}/comments`)
 
-export const addComment = (comment) => axiosInstance.post(`/comments`, comment)
+export const saveComment = (comment) => axiosInstance.post(`/comments`, comment)
 
 export const deleteComment = (id) => axiosInstance.delete(`/comments/${id}`)
