@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { sortByVotes, sortByTitle, sortByDate } from '../actions/posts'
-import { Button, Header, Icon } from 'semantic-ui-react'
+import { Button, Header, Icon, Popup } from 'semantic-ui-react'
 class PostsSorter extends Component {
 	render() {
 		return (
 			<div>
 				<Header as='h3'>
-					<Icon name='sort amount up' />
-					<Header.Content>Order Posts By</Header.Content>
+					<Icon name='sort' />
+					<Header.Content>Order Posts</Header.Content>
 				</Header>
 				<Button.Group fluid>
-					<Button icon size='mini' onClick={() => this.props.sortByVotes()}>
-						<Icon name='thumbs up'/>
-					</Button>
-					<Button icon size='mini' onClick={() => this.props.sortByTitle()}>
-						<Icon name='text height'/>
-					</Button>
-					<Button icon size='mini' onClick={() => this.props.sortByDate()}>
-						<Icon name='calendar'/>
-					</Button>
+					<Popup content='By votes' position='bottom center' trigger={
+						<Button icon size='mini' onClick={() => this.props.sortByVotes()}>
+							<Icon size='large' name='sort numeric up'/>
+						</Button>
+					}/>
+
+					<Popup content='By title' position='bottom center' trigger={
+						<Button icon size='mini' onClick={() => this.props.sortByTitle()}>
+							<Icon size='large' name='sort alphabet down'/>
+						</Button>
+					}/>
+
+					<Popup content='By date' position='bottom center' trigger={
+						<Button icon size='mini' onClick={() => this.props.sortByDate()}>
+							<Icon size='large' name='calendar'/>
+						</Button>
+					}/>
 				</Button.Group>
 			</div>
 		)

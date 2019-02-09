@@ -16,7 +16,7 @@ class Categories extends Component {
 		return (
 			<div>
 				<Header as='h3'>
-					<Icon name='list' />
+					<Icon name='tags' />
 					<Header.Content>Categories</Header.Content>
 				</Header>
 				<Menu fluid vertical tabular>

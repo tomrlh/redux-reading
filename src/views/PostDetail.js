@@ -6,7 +6,7 @@ import PostComments from '../components/PostComments'
 
 import { fetchPost } from '../actions/posts'
 
-class Post extends Component {
+class PostDetail extends Component {
 	render() {
 		let formatedDate = new Date(this.props.post.timestamp).toLocaleDateString('pt-BR')
 		let post = this.props.post
@@ -46,11 +46,11 @@ class Post extends Component {
 
 
 
-Post.propTypes = {
+PostDetail.propTypes = {
 	post: PropTypes.object
 }
 
-Post.defaultProps = {
+PostDetail.defaultProps = {
 	post: { title: '', body: '', voteScore: null, parentId: '' }
 }
 
@@ -71,4 +71,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post)
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

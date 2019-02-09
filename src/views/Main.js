@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Container, Divider, Grid, Item } from 'semantic-ui-react'
+import { Button, Container, Divider, Grid, Item } from 'semantic-ui-react'
 import Categories from '../components/Categories'
 import PostSmall from '../components/PostSmall'
 import PostsSorter from '../components/PostsSorter'
-
 import { fetchPosts } from '../actions/posts'
 import { fetchCategories } from '../actions/categories'
 
@@ -37,9 +37,15 @@ class Main extends React.Component {
 					<Grid.Column width={4}>
 						<PostsSorter/>
 						<Divider/>
-						<h4>Search field post here</h4>
-						<Divider/>
 
+						<h4>Search field post here</h4>
+
+						<Divider/>
+						<Link to={'/add-post'}>
+							<Button.Group vertical labeled icon>
+								<Button icon='add' content='Add new post'/>
+							</Button.Group>
+						</Link>
 					</Grid.Column>
 				</Grid>
 			</Container>
@@ -71,7 +77,7 @@ Main.defaultProps = {
 function mapStateToProps(state) {
 	return {
 		posts: state.posts.allPosts,
-		categories: state.categories.categories
+		categories: state.categories.allCategories
 	}
 }
 

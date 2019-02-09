@@ -5,7 +5,7 @@ export default function categories(state={}, action) {
 		case RECEIVE_CATEGORIES:
 			return {
 				...state,
-				categories: action.categories
+				allCategories: action.categories
 			}
 		default:
 			return state
