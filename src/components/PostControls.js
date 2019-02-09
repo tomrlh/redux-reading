@@ -1,37 +1,56 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Icon, Item, Label } from 'semantic-ui-react'
 import VoteScore from './VoteScore'
+import { toggleIsEditingPost } from '../actions/posts'
 
-const PostControls = (props) => {
-	let post = {
-		id: props.id,
-		title: props.title,
-		body: props.body,
-		category: props.category,
-		voteScore: props.voteScore,
-		timestamp: props.timestamp
+class PostControls extends React.Component {
+	render() {
+		let post = {
+			id: this.props.id,
+			title: this.props.title,
+			body: this.props.body,
+			category: this.props.category,
+			voteScore: this.props.voteScore,
+			timestamp: this.props.timestamp
+		}
+		return (
+			<div>
+				<Item.Extra>
+					<Icon color='green' name='check'/> {this.props.voteScore} <span style={{marginRight: '5px'}}>votes</span>
+
+					<Label as='a' onClick={() => {this.props.toggleIsEditingPost()}}>
+						<Icon name='edit' /> Edit
+					</Label>
+
+					<Label as='a' onClick={() => {this.props.deleteAction(this.props.id)}}>
+						<Icon name='trash alternate outline' /> Delete
+					</Label>
+
+					<VoteScore
+						id={this.props.id}
+						upVote={this.props.upVote}
+						downVote={this.props.downVote}
+					/>
+				</Item.Extra>
+			</div>
+		)
 	}
-	return (
-		<div>
-			<Item.Extra>
-				<Icon color='green' name='check'/> {props.voteScore} <span>votes</span>
-
-				<Label as='a' onClick={() => {props.editAction(post)}}>
-					<Icon name='edit' /> Edit
-				</Label>
-
-				<Label as='a' onClick={() => {props.deleteAction(props.id)}}>
-					<Icon name='trash alternate outline' /> Delete
-				</Label>
-
-				<VoteScore
-					id={props.id}
-					upVote={props.upVote}
-					downVote={props.downVote}
-				/>
-			</Item.Extra>
-		</div>
-	)
 }
 
-export default PostControls
+
+function mapStateToProps(state, ownProps) {
+	return { isEditingPost: state.posts.isEditing }
+}
+
+
+
+function mapDispatchToProps(dispatch) {
+	return {
+		toggleIsEditingPost: () => dispatch(toggleIsEditingPost())
+	}
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostControls)

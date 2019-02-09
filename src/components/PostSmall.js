@@ -11,7 +11,7 @@ class PostSmall extends React.Component {
 		let formatedDate = new Date(this.props.timestamp).toLocaleDateString('pt-BR')
 		return (
 			<Segment raised>
-				<Label as='a' color='teal' ribbon='left'>
+				<Label as='span' color='teal' ribbon>
 					{formatedDate}
 				</Label>
 				<span>{this.props.title}</span>
@@ -41,6 +41,7 @@ class PostSmall extends React.Component {
 							category={this.props.category}
 							voteScore={this.props.voteScore}
 							timestamp={this.props.timestamp}
+
 							deleteAction={this.props.deletePost}
 							upVote={this.props.upVote}
 							downVote={this.props.downVote}

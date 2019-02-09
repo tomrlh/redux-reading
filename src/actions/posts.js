@@ -3,6 +3,7 @@ export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST = 'SET_POST'
+export const TOGGLE_ISEDITINGPOST = 'TOGGLE_ISEDITINGPOST'
 export const SORT_BY_VOTES = 'SORT_BY_VOTES'
 export const SORT_BY_TITLE = 'SORT_BY_TITLE'
 export const SORT_BY_DATE = 'SORT_BY_DATE'
@@ -10,6 +11,8 @@ export const SORT_BY_DATE = 'SORT_BY_DATE'
 export const setPosts = posts => ({ type: SET_POSTS, posts })
 
 export const setPost = post => ({ type: SET_POST, post })
+
+export const toggleIsEditingPost = () => ({ type: TOGGLE_ISEDITINGPOST })
 
 export const upVotePost = id => ({ type: UP_VOTE_POST, id })
 

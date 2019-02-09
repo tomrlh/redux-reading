@@ -5,15 +5,19 @@ import PropTypes from 'prop-types'
 import { Button, Container, Divider, Grid, Item } from 'semantic-ui-react'
 import Categories from '../components/Categories'
 import PostSmall from '../components/PostSmall'
+import EditPostModal from '../components/EditPostModal'
 import PostsSorter from '../components/PostsSorter'
 import { fetchPosts } from '../actions/posts'
 import { fetchCategories } from '../actions/categories'
 
 class Main extends React.Component {
+	state ={
+		isEditing: false
+	}
 
 	render() {
 		return (
-			<Container>
+			<Container className='containerStyle'>
 				<Grid columns='equal'>
 					<Grid.Column width={4}>
 						<Categories categories={this.props.categories}/>
@@ -29,6 +33,7 @@ class Main extends React.Component {
 									category={p.category}
 									voteScore={p.voteScore}
 									timestamp={p.timestamp}
+									editModalFlag={this.state.isEditing}
 								/>
 							)}
 						</Item.Group>
@@ -41,13 +46,14 @@ class Main extends React.Component {
 						<h4>Search field post here</h4>
 
 						<Divider/>
+
 						<Link to={'/add-post'}>
-							<Button.Group vertical labeled icon>
-								<Button icon='add' content='Add new post'/>
-							</Button.Group>
+							<Button fluid icon='add' content='Add new post' color='green'/>
 						</Link>
 					</Grid.Column>
 				</Grid>
+
+				<EditPostModal/>
 			</Container>
 		);
 	}

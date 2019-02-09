@@ -8,9 +8,9 @@ class PostsSorter extends Component {
 			<div>
 				<Header as='h3'>
 					<Icon name='sort' />
-					<Header.Content>Order Posts</Header.Content>
+					<Header.Content>Sort Posts</Header.Content>
 				</Header>
-				<Button.Group fluid>
+				<Button.Group fluid color='yellow'>
 					<Popup content='By votes' position='bottom center' trigger={
 						<Button icon size='mini' onClick={() => this.props.sortByVotes()}>
 							<Icon size='large' name='sort numeric up'/>
