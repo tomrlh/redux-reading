@@ -10,14 +10,14 @@ class PostsSorter extends Component {
 					<Icon name='sort amount up' />
 					<Header.Content>Order Posts By</Header.Content>
 				</Header>
-				<Button.Group>
-					<Button size='mini' onClick={() => this.props.sortByVotes()}>
+				<Button.Group fluid>
+					<Button icon size='mini' onClick={() => this.props.sortByVotes()}>
 						<Icon name='thumbs up'/>
 					</Button>
-					<Button size='mini' onClick={() => this.props.sortByTitle()}>
+					<Button icon size='mini' onClick={() => this.props.sortByTitle()}>
 						<Icon name='text height'/>
 					</Button>
-					<Button size='mini' onClick={() => this.props.sortByDate()}>
+					<Button icon size='mini' onClick={() => this.props.sortByDate()}>
 						<Icon name='calendar'/>
 					</Button>
 				</Button.Group>

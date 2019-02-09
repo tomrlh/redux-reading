@@ -21,16 +21,16 @@ class Categories extends Component {
 				</Header>
 				<Menu fluid vertical tabular>
 					<Menu.Item
-						name='all' 
-						active={this.state.activeItem === 'all'} 
+						name='all'
+						active={this.state.activeItem === 'all'}
 						onClick={() => {
 							this.handleItemClick('all')
 							this.props.getPosts()
-						}} 
+						}}
 					>
 						<Label color='teal'>{this.props.allPosts.length}</Label>All
 					</Menu.Item>
-					{this.props.categories.map((c, idx) => 
+					{this.props.categories.map((c, idx) =>
 						<Menu.Item
 							key={idx} name={c.name}
 							active={this.state.activeItem === c.name}

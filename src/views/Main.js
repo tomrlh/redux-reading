@@ -16,11 +16,10 @@ class Main extends React.Component {
 			<Container>
 				<Grid columns='equal'>
 					<Grid.Column width={4}>
-						<PostsSorter/>
-						<Divider/>
 						<Categories categories={this.props.categories}/>
 					</Grid.Column>
-					<Grid.Column width={10}>
+
+					<Grid.Column width={8}>
 						<Item.Group divided>
 							{this.props.posts.map((p, idx) =>
 								<PostSmall key={idx}
@@ -34,7 +33,14 @@ class Main extends React.Component {
 							)}
 						</Item.Group>
 					</Grid.Column>
-					<Grid.Column width={2}></Grid.Column>
+
+					<Grid.Column width={4}>
+						<PostsSorter/>
+						<Divider/>
+						<h4>Search field post here</h4>
+						<Divider/>
+
+					</Grid.Column>
 				</Grid>
 			</Container>
 		);
