@@ -32,6 +32,15 @@ export const fetchPosts = () => dispatch => (
 
 
 
+export const savePost = (post) => dispatch => (
+	ApiUtil
+		.savePost(post)
+		.then(response => dispatch(setPost(response.data)))
+		.catch(error => {console.log(error)})
+)
+
+
+
 export const fetchPost = (id) => dispatch => (
 	ApiUtil
 		.fetchPost(id)

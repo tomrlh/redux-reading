@@ -4,6 +4,8 @@ export const fetchPosts = () => axiosInstance.get('/posts')
 
 export const fetchPost = (id) => axiosInstance.get(`/posts/${id}`)
 
+export const savePost = (post) => axiosInstance.post('/posts', post)
+
 export const fetchPostsByCategory = (category) => axiosInstance.get(`/${category}/posts`)
 
 export const fetchCategories = () => axiosInstance.get('/categories')
