@@ -25,7 +25,7 @@ class Main extends React.Component {
 
 					<Grid.Column width={8}>
 						<Item.Group divided>
-							{this.props.posts.map((p, idx) =>
+							{this.props.filteredPosts.map((p, idx) =>
 								<PostSmall key={idx}
 									id={p.id}
 									title={p.title}
@@ -62,7 +62,8 @@ class Main extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchPosts()
-		this.props.getCategories()
+
+		this.props.fetchCategories()
 	}
 }
 
@@ -83,14 +84,16 @@ Main.defaultProps = {
 function mapStateToProps(state) {
 	return {
 		posts: state.posts.allPosts,
-		categories: state.categories.allCategories
+		filteredPosts: state.posts.filteredPosts,
+		categories: state.categories.allCategories,
+		// activeCategory: state.categories.activeCategory
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchPosts: () => dispatch(fetchPosts()),
-		getCategories: () => dispatch(fetchCategories())
+		fetchCategories: () => dispatch(fetchCategories())
 	}
 }
 

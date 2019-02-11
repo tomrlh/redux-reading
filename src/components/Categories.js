@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts, fetchPostsByCategory } from '../actions/posts'
+import { fetchPosts, fetchFilteredPosts } from '../actions/posts'
+import { setActiveCategory } from '../actions/categories'
 import { Label, Header, Icon, Menu } from 'semantic-ui-react'
 
 class Categories extends Component {
-	state = {activeItem: 'all'}
+	state = {activeCategory: 'all'}
 
-	handleItemClick = (name) => this.setState({ activeItem: name })
-
-	filterPostsByCategory = (categoryName) => {
-		return this.props.allPosts.filter((p) => p.category === categoryName)
-	}
+	handleItemClick = (name) => this.setState({ activeCategory: name })
 
 	render() {
 		return (
@@ -22,10 +19,10 @@ class Categories extends Component {
 				<Menu fluid vertical tabular>
 					<Menu.Item
 						name='all'
-						active={this.state.activeItem === 'all'}
+						active={this.state.activeCategory === 'all'}
 						onClick={() => {
 							this.handleItemClick('all')
-							this.props.getPosts()
+							this.props.fetchFilteredPosts('all')
 						}}
 					>
 						<Label color='teal'>{this.props.allPosts.length}</Label>All
@@ -33,14 +30,14 @@ class Categories extends Component {
 					{this.props.categories.map((c, idx) =>
 						<Menu.Item
 							key={idx} name={c.name}
-							active={this.state.activeItem === c.name}
+							active={this.state.activeCategory === c.name}
 							onClick={() => {
 								this.handleItemClick(c.name)
-								this.props.getPostsByCategory(c.name)
+								this.props.fetchFilteredPosts(c.name)
 							}}
 						>
 							<Label color='teal'>
-								{this.filterPostsByCategory(c.name).length}
+								{this.props.allPosts.filter(p => p.category === c.name).length}
 							</Label>
 							{c.name.charAt(0).toUpperCase() + c.name.slice(1)}
 						</Menu.Item>
@@ -49,13 +46,16 @@ class Categories extends Component {
 			</div>
 		);
 	}
+
+	componentDidMount() {this.props.fetchFilteredPosts('all')}
 }
 
 
 
 function mapStateToProps(state) {
 	return {
-		allPosts: state.posts.allPosts
+		allPosts: state.posts.allPosts,
+		filteredPosts: state.posts.filteredPosts
 	}
 }
 
@@ -63,8 +63,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getPosts: () => dispatch(fetchPosts()),
-		getPostsByCategory: (category) => dispatch(fetchPostsByCategory(category))
+		fetchPosts: () => dispatch(fetchPosts()),
+		fetchFilteredPosts: (category) => dispatch(fetchFilteredPosts(category)),
+		// setActiveCategory: (category) => dispatch(setActiveCategory(category))
 	}
 }
 

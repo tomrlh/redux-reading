@@ -2,6 +2,7 @@ import {
 	UP_VOTE_POST,
 	DOWN_VOTE_POST,
 	SET_POSTS,
+	SET_FILTERED_POSTS,
 	SET_POST,
 	TOGGLE_ISEDITINGPOST,
 	SORT_BY_VOTES,
@@ -10,9 +11,10 @@ import {
 } from '../actions/posts'
 
 const INITIAL_STATE = {
-  allPosts: [],
-  post: {},
-  isEditingPost: false
+	allPosts: [],
+	filteredPosts: [],
+	post: {},
+	isEditingPost: false
 }
 
 export default function posts(state=INITIAL_STATE, action) {
@@ -43,6 +45,11 @@ export default function posts(state=INITIAL_STATE, action) {
 			return {
 				...state,
 				allPosts: action.posts
+			}
+		case SET_FILTERED_POSTS:
+			return {
+				...state,
+				filteredPosts: action.filteredPosts
 			}
 		case SET_POST:
 			return {

@@ -8,7 +8,7 @@ export const savePost = (post) => axiosInstance.post('/posts', post)
 
 export const deletePost = (id) => axiosInstance.delete(`/posts/${id}`)
 
-export const fetchPostsByCategory = (category) => axiosInstance.get(`/${category}/posts`)
+export const fetchFilteredPosts = (category) => axiosInstance.get(`/${category}/posts`)
 
 export const fetchCategories = () => axiosInstance.get('/categories')
 
