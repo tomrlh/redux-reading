@@ -11,6 +11,8 @@ class PostControls extends React.Component {
 				<Item.Extra>
 					<Icon color='green' name='check'/> {this.props.voteScore} <span style={{marginRight: '5px'}}>votes</span>
 
+					<Icon color='blue' name='comment'/> {this.props.commentCount} <span style={{marginRight: '5px'}}>comments</span>
+
 					<Label as='a' onClick={() => {
 						this.props.setIsEditingPost(true)
 						this.props.setPostDetails({

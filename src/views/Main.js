@@ -40,6 +40,7 @@ class Main extends React.Component {
 									author={p.author}
 									category={p.category}
 									voteScore={p.voteScore}
+									commentCount={p.commentCount}
 
 									timestamp={p.timestamp}
 									editModalFlag={this.state.isEditing}

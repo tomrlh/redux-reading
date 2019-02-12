@@ -17,7 +17,7 @@ class PostDetail extends Component {
 				<Grid columns='equal'>
 					<Grid.Column width={4}>
 					<Link to={'/'}>
-						<Button fluid icon='arrow alternate circle left' color='blue'>
+						<Button fluid color='blue'>
 							Return to Main Page
 						</Button>
 					</Link>

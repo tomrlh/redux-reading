@@ -18,12 +18,18 @@ class PostForm extends React.Component {
 	formatAndSavePost = () => {
 		this.setState({ isSaving: true, isSaved: false })
 		let post = this.state
+		let editingPost = this.props.editingPost
 
 		post.timestamp = new Date().getTime()
-		if(this.props.editingPost)
-			post.id = this.props.editingPost.id
+		if(editingPost)
+			post.id = editingPost.id
 		else
 			post.id = post.author + post.timestamp
+
+		post.title = this.state.title === '' ? editingPost.title : this.state.title
+		post.author = this.state.author === '' ? editingPost.author : this.state.author
+		post.body = this.state.body === '' ? editingPost.body : this.state.body
+		post.category = this.state.category === '' ? editingPost.category : this.state.category
 
 		this.props.savePost(post)
 		this.setState({
@@ -39,7 +45,7 @@ class PostForm extends React.Component {
 
 	render() {
 		let categoryOptions = []
-
+		let editingPost = this.props.editingPost
 		if(this.props.categories) {
 			categoryOptions = this.props.categories.map((c) => {
 				c.text = c.name.charAt(0).toUpperCase() + c.name.slice(1)
@@ -57,13 +63,14 @@ class PostForm extends React.Component {
 				<Message
 					success
 					header='Success'
-					content="Your blog post was created."
+					content="Your blog post was saved."
 					onDismiss={this.handleDismiss}
 				/>
 				<Form.Field
 					id='form-input-control-first-name'
 					control={Input} required
 					label='Post Title'
+					defaultValue={editingPost ? editingPost.title : ''}
 					placeholder='Name your post...'
 					onChange={(e, { value }) => this.setState({title: value})}
 				/>
@@ -72,6 +79,7 @@ class PostForm extends React.Component {
 						id='form-input-control-last-name'
 						control={Input} required
 						label='Author'
+						defaultValue={editingPost ? editingPost.author : ''}
 						placeholder='Fill with your name...'
 						onChange={(e, { value }) => this.setState({author: value})}
 					/>
@@ -79,6 +87,7 @@ class PostForm extends React.Component {
 						control={Select} required
 						options={categoryOptions}
 						label='Category' search
+						defaultValue={editingPost ? editingPost.category : ''}
 						placeholder='Select a category...'
 						searchInput={{ id: 'form-select-control-gender' }}
 						onChange={(e, { value }) => this.setState({category: value})}
@@ -89,6 +98,7 @@ class PostForm extends React.Component {
 				<Form.Field
 					id='form-textarea-control-opinion'
 					control={TextArea} required
+					defaultValue={editingPost ? editingPost.body : ''}
 					label='Content of your post'
 					placeholder='Write your awesome post here...'
 					onChange={(e, { value }) => this.setState({body: value})}

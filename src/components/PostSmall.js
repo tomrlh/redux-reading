@@ -15,7 +15,7 @@ class PostSmall extends React.Component {
 					{formatedDate}
 				</Label>
 				<span>{this.props.title}</span>
-				<Link to={`/post/${this.props.id}`}>
+				<Link to={`/${this.props.category}/${this.props.id}`}>
 					<Button
 						floated='right' size='mini' color='blue'
 						icon labelPosition='right'>
@@ -41,6 +41,7 @@ class PostSmall extends React.Component {
 							body={this.props.body}
 							category={this.props.category}
 							voteScore={this.props.voteScore}
+							commentCount={this.props.commentCount}
 							timestamp={this.props.timestamp}
 
 							deleteAction={this.props.deletePost}

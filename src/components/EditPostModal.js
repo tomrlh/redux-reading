@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { Button, Form, Input, Message, Modal } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 import { setIsEditingPost } from '../actions/posts'
 import PostForm from './PostForm'
 

@@ -17,17 +17,6 @@ export default class EditCommentModal extends React.Component {
 
 		setTimeout(() => {
 			let comment = this.props.comment
-
-			if(this.state.author.length === 0) {
-				this.setState({hideAuthorAlert: false, isSavingComment: false})
-				return
-			} else this.setState({hideAuthorAlert: true, isSavingComment: false})
-
-			if(this.state.body.length === 0) {
-				this.setState({hideBodyAlert: false, isSavingComment: false})
-				return
-			} else this.setState({hideBodyAlert: true, isSavingComment: false})
-
 			comment.timestamp = new Date().getTime()
 			comment.author = this.state.author.length === 0 ? this.props.comment.author : this.state.author
 			comment.body = this.state.body.length === 0 ? this.props.comment.body : this.state.body

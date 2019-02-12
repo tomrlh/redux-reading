@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Header, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Header, Input } from 'semantic-ui-react'
 
 export default class CommentForm extends React.Component {
 	state = {
