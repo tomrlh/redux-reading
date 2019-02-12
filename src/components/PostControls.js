@@ -6,14 +6,6 @@ import { toggleIsEditingPost } from '../actions/posts'
 
 class PostControls extends React.Component {
 	render() {
-		let post = {
-			id: this.props.id,
-			title: this.props.title,
-			body: this.props.body,
-			category: this.props.category,
-			voteScore: this.props.voteScore,
-			timestamp: this.props.timestamp
-		}
 		return (
 			<div>
 				<Item.Extra>

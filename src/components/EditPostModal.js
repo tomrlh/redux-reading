@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Button, Form, Input, Message, Modal } from 'semantic-ui-react'
 import { toggleIsEditingPost } from '../actions/posts'
+import PostForm from './PostForm'
 
 class EditPostModal extends React.Component {
 	state = {
@@ -11,10 +12,13 @@ class EditPostModal extends React.Component {
 
 	render() {
 		return (
-			<Modal size='large' open={this.props.isEditingPost} onClose={() => this.props.toggleIsEditingPost()}>
+			<Modal
+				size='large' closeIcon
+				open={this.props.isEditingPost}
+				onClose={() => this.props.toggleIsEditingPost()}>
 				<Modal.Header>Delete Your Account</Modal.Header>
 				<Modal.Content>
-					<p>Are you sure you want to delete your account</p>
+					<PostForm/>
 				</Modal.Content>
 				<Modal.Actions>
 					<Button negative>No</Button>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts, fetchPostsByCategory } from '../actions/posts'
+import { fetchPostsByCategory } from '../actions/posts'
 import { setSelectedCategory } from '../actions/categories'
 import { Label, Header, Icon, Menu } from 'semantic-ui-react'
 
