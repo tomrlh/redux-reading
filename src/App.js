@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
 import Main from './views/Main'
-import PostDetail from './views/PostDetail'
+import PostDetails from './views/PostDetails'
 import NewPost from './views/NewPost'
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
 				<div className="App">
 				<Switch>
 					<Route path='/' exact={true} component={Main} />
-					<Route path='/post/:id' exact={true} component={PostDetail} />
+					<Route path='/post/:id' exact={true} component={PostDetails} />
 					<Route path='/add-post/' exact={true} component={NewPost} />
 				</Switch>
 				</div>

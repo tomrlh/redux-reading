@@ -8,8 +8,8 @@ import { fetchPost } from '../actions/posts'
 
 class PostDetail extends Component {
 	render() {
-		let formatedDate = new Date(this.props.post.timestamp).toLocaleDateString('pt-BR')
-		let post = this.props.post
+		let formatedDate = new Date(this.props.postDetails.timestamp).toLocaleDateString('pt-BR')
+		let post = this.props.postDetails
 
 		return (
 			<Container text>
@@ -47,18 +47,18 @@ class PostDetail extends Component {
 
 
 PostDetail.propTypes = {
-	post: PropTypes.object
+	postDetails: PropTypes.object
 }
 
 PostDetail.defaultProps = {
-	post: { title: '', body: '', voteScore: null, parentId: '' }
+	postDetails: { title: '', body: '', voteScore: null, parentId: '' }
 }
 
 
 
 function mapStateToProps(state, ownProps) {
 	return {
-		post: state.posts.postDetail,
+		postDetails: state.posts.postDetails,
 		postComments: state.comments.postComments
 	}
 }

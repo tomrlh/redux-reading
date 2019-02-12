@@ -2,7 +2,7 @@ import {
 	UP_VOTE_POST,
 	DOWN_VOTE_POST,
 	SET_POSTS,
-	SET_POST,
+	SET_POST_DETAILS,
 	TOGGLE_ISEDITINGPOST,
 	SORT_BY_VOTES,
 	SORT_BY_TITLE,
@@ -44,10 +44,10 @@ export default function posts(state=INITIAL_STATE, action) {
 				...state,
 				allPosts: action.posts
 			}
-		case SET_POST:
+		case SET_POST_DETAILS:
 			return {
 				...state,
-				postDetail: action.post
+				postDetails: action.postDetails
 			}
 		case TOGGLE_ISEDITINGPOST:
 			return {
