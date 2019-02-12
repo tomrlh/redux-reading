@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts, fetchPostsByCategory } from '../actions/posts'
+import { setSelectedCategory } from '../actions/categories'
 import { Label, Header, Icon, Menu } from 'semantic-ui-react'
 
 class Categories extends Component {
@@ -25,7 +26,7 @@ class Categories extends Component {
 						active={this.state.activeItem === 'all'}
 						onClick={() => {
 							this.handleItemClick('all')
-							this.props.getPosts()
+							this.props.setSelectedCategory('all')
 						}}
 					>
 						<Label color='teal'>{this.props.allPosts.length}</Label>All
@@ -36,7 +37,7 @@ class Categories extends Component {
 							active={this.state.activeItem === c.name}
 							onClick={() => {
 								this.handleItemClick(c.name)
-								this.props.getPostsByCategory(c.name)
+								this.props.setSelectedCategory(c.name)
 							}}
 						>
 							<Label color='teal'>
@@ -64,6 +65,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getPosts: () => dispatch(fetchPosts()),
+		setSelectedCategory: (category) => dispatch(setSelectedCategory(category)),
 		getPostsByCategory: (category) => dispatch(fetchPostsByCategory(category))
 	}
 }

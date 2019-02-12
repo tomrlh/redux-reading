@@ -16,6 +16,13 @@ class Main extends React.Component {
 	}
 
 	render() {
+		let postsToShow = []
+		let selectedCategory = this.props.selectedCategory
+		if(selectedCategory && selectedCategory !== 'all')
+			postsToShow = this.props.allPosts.filter(p => p.category === selectedCategory)
+		else
+			postsToShow = this.props.allPosts
+
 		return (
 			<Container className='containerStyle'>
 				<Grid columns='equal'>
@@ -25,7 +32,7 @@ class Main extends React.Component {
 
 					<Grid.Column width={8}>
 						<Item.Group divided>
-							{this.props.posts.map((p, idx) =>
+							{postsToShow.map((p, idx) =>
 								<PostSmall key={idx}
 									id={p.id}
 									title={p.title}
@@ -69,12 +76,12 @@ class Main extends React.Component {
 
 
 Main.propTypes = {
-	posts: PropTypes.array,
+	allPosts: PropTypes.array,
 	categories: PropTypes.array
 }
 
 Main.defaultProps = {
-	posts: [],
+	allPosts: [],
 	categories: []
 }
 
@@ -82,8 +89,9 @@ Main.defaultProps = {
 
 function mapStateToProps(state) {
 	return {
-		posts: state.posts.allPosts,
-		categories: state.categories.allCategories
+		allPosts: state.posts.allPosts,
+		categories: state.categories.allCategories,
+		selectedCategory: state.categories.selectedCategory
 	}
 }
 
