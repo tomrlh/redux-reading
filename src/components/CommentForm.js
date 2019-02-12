@@ -16,7 +16,7 @@ export default class CommentForm extends React.Component {
 		comment.author = this.state.author
 		comment.body = this.state.body
 
-		this.props.addComment(comment)
+		this.props.saveComment(comment)
 	}
 
 	render() {

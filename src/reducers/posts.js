@@ -26,7 +26,8 @@ export default function posts(state=INITIAL_STATE, action) {
 						return post
 					}
 					else return post
-				})
+				}),
+				postDetails: state.postDetails.voteScore += 1
 			}
 		case DOWN_VOTE_POST:
 			return {
@@ -37,7 +38,8 @@ export default function posts(state=INITIAL_STATE, action) {
 						return post
 					}
 					else return post
-				})
+				}),
+				postDetails: state.postDetails.voteScore -= 1
 			}
 		case SET_POSTS:
 			return {

@@ -9,6 +9,8 @@ class PostControls extends React.Component {
 		return (
 			<div>
 				<Item.Extra>
+					<Icon name='user'/> {this.props.author} <span style={{marginRight: '5px'}}></span>
+
 					<Icon color='green' name='check'/> {this.props.voteScore} <span style={{marginRight: '5px'}}>votes</span>
 
 					<Icon color='blue' name='comment'/> {this.props.commentCount} <span style={{marginRight: '5px'}}>comments</span>

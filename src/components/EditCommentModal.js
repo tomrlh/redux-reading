@@ -21,7 +21,7 @@ export default class EditCommentModal extends React.Component {
 			comment.author = this.state.author.length === 0 ? this.props.comment.author : this.state.author
 			comment.body = this.state.body.length === 0 ? this.props.comment.body : this.state.body
 
-			this.props.addComment(comment)
+			this.props.saveComment(comment)
 			this.setState({open: false, isSavingComment: false})
 			this.props.closeFunction()
 		}, 500)
@@ -73,7 +73,7 @@ export default class EditCommentModal extends React.Component {
 
 
 EditCommentModal.propTypes = {
-	addComment: PropTypes.function,
+	saveComment: PropTypes.function,
 	comment: PropTypes.object,
 	openFlag: PropTypes.boolean,
 	closeFunction: PropTypes.function

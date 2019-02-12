@@ -78,7 +78,8 @@ export const fetchUpVote = (id) => dispatch => (
 	ApiUtil
 		.fetchUpVote(id)
 		.then(response => {
-			return dispatch(upVotePost(response.data.id))
+			dispatch(upVotePost(response.data.id))
+			dispatch(setPostDetails(response.data))
 		})
 		.catch(error => {console.log(error)})
 )
@@ -90,7 +91,8 @@ export const fetchDownVote = (id) => dispatch => (
 	ApiUtil
 		.fetchDownVote(id)
 		.then(response => {
-			return dispatch(downVotePost(response.data.id))
+			dispatch(downVotePost(response.data.id))
+			dispatch(setPostDetails(response.data))
 		})
 		.catch(error => {console.log(error)})
 )

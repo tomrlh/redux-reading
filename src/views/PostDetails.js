@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button, Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
 import PostComments from '../components/PostComments'
+import VoteScore from '../components/VoteScore'
+import { fetchPost, fetchUpVote, fetchDownVote } from '../actions/posts'
 
-import { fetchPost } from '../actions/posts'
-
-class PostDetail extends Component {
+class PostDetails extends Component {
 	render() {
 		let formatedDate = new Date(this.props.postDetails.timestamp).toLocaleDateString('pt-BR')
 		let post = this.props.postDetails
@@ -33,7 +33,12 @@ class PostDetail extends Component {
 						<Divider />
 						<p>{post.body}</p>
 						<Divider />
-						<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {post.voteScore}
+						<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {this.props.postDetails.voteScore}
+						<VoteScore
+							id={post.id}
+							upVote={this.props.upVote}
+							downVote={this.props.downVote}
+						/>
 						<br/><br/>
 						<PostComments parentId={this.props.match.params.id}/>
 					</Grid.Column>
@@ -60,11 +65,11 @@ class PostDetail extends Component {
 
 
 
-PostDetail.propTypes = {
+PostDetails.propTypes = {
 	postDetails: PropTypes.object
 }
 
-PostDetail.defaultProps = {
+PostDetails.defaultProps = {
 	postDetails: { title: '', body: '', voteScore: null, parentId: '' }
 }
 
@@ -81,8 +86,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchPost: (id) => dispatch(fetchPost(id))
+		fetchPost: (id) => dispatch(fetchPost(id)),
+		upVote: (id) => dispatch(fetchUpVote(id)),
+		downVote: (id) => dispatch(fetchDownVote(id))
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails)
