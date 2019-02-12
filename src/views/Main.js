@@ -69,8 +69,7 @@ class Main extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchPosts()
-
-		this.props.fetchCategories()
+		this.props.getCategories()
 	}
 }
 
@@ -99,7 +98,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchPosts: () => dispatch(fetchPosts()),
-		fetchCategories: () => dispatch(fetchCategories())
+		getCategories: () => dispatch(fetchCategories())
 	}
 }
 

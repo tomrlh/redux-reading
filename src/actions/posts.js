@@ -2,7 +2,6 @@ import * as ApiUtil from '../utils/ApiUtil'
 export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const SET_POSTS = 'SET_POSTS'
-export const SET_FILTERED_POSTS = 'SET_FILTERED_POSTS'
 export const SET_POST = 'SET_POST'
 export const TOGGLE_ISEDITINGPOST = 'TOGGLE_ISEDITINGPOST'
 export const SORT_BY_VOTES = 'SORT_BY_VOTES'
@@ -10,8 +9,6 @@ export const SORT_BY_TITLE = 'SORT_BY_TITLE'
 export const SORT_BY_DATE = 'SORT_BY_DATE'
 
 export const setPosts = posts => ({ type: SET_POSTS, posts })
-
-export const setFilteredPosts = filteredPosts => ({ type: SET_FILTERED_POSTS, filteredPosts })
 
 export const setPost = post => ({ type: SET_POST, post })
 
@@ -65,21 +62,12 @@ export const fetchPost = (id) => dispatch => (
 
 
 
-export const fetchFilteredPosts = (category = null) => dispatch => {
-	if(!category || category === 'all') {
-		console.log('aqui caralho')
-		ApiUtil
-			.fetchPosts()
-			.then(response => dispatch(setFilteredPosts(response.data)))
-			.catch(error => {console.log(error)})
-	}
-	else {
-		ApiUtil
-			.fetchFilteredPosts(category)
-			.then(response => dispatch(setFilteredPosts(response.data)))
-			.catch(error => {console.log(error)})
-	}
-}
+export const fetchPostsByCategory = (category) => dispatch => (
+	ApiUtil
+		.fetchPostsByCategory(category)
+		.then(response => dispatch(setPosts(response.data)))
+		.catch(error => {console.log(error)}
+))
 
 
 

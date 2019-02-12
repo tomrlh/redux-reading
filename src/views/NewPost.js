@@ -11,7 +11,7 @@ class NewPost extends React.Component {
 				<Grid columns='equal'>
 					<Grid.Column width={4}></Grid.Column>
 
-					<Grid.Column width={8}>
+					<Grid.Column width={10}>
 						<PostForm/>
 					</Grid.Column>
 
