@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts, fetchFilteredPosts } from '../actions/posts'
-import { setActiveCategory } from '../actions/categories'
+import { fetchPosts, fetchPostsByCategory } from '../actions/posts'
+import { setSelectedCategory } from '../actions/categories'
 import { Label, Header, Icon, Menu } from 'semantic-ui-react'
 
 class Categories extends Component {
@@ -22,7 +22,7 @@ class Categories extends Component {
 						active={this.state.activeCategory === 'all'}
 						onClick={() => {
 							this.handleItemClick('all')
-							this.props.fetchFilteredPosts('all')
+							this.props.setSelectedCategory('all')
 						}}
 					>
 						<Label color='teal'>{this.props.allPosts.length}</Label>All
@@ -33,7 +33,7 @@ class Categories extends Component {
 							active={this.state.activeCategory === c.name}
 							onClick={() => {
 								this.handleItemClick(c.name)
-								this.props.fetchFilteredPosts(c.name)
+								this.props.setSelectedCategory(c.name)
 							}}
 						>
 							<Label color='teal'>
@@ -63,9 +63,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchPosts: () => dispatch(fetchPosts()),
-		fetchFilteredPosts: (category) => dispatch(fetchFilteredPosts(category)),
-		// setActiveCategory: (category) => dispatch(setActiveCategory(category))
+		getPosts: () => dispatch(fetchPosts()),
+		setSelectedCategory: (category) => dispatch(setSelectedCategory(category)),
+		getPostsByCategory: (category) => dispatch(fetchPostsByCategory(category))
 	}
 }
 

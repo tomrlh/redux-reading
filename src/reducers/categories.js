@@ -1,11 +1,7 @@
-import {
-	RECEIVE_CATEGORIES,
-	SET_ACTIVE_CATEGORY
-} from '../actions/categories'
+import { RECEIVE_CATEGORIES, SET_SELECTED_CATEGORY } from '../actions/categories'
 
 const INITIAL_STATE = {
-	allCategories: [],
-	activeCategory: 'all'
+  selectedCategory: 'all'
 }
 
 export default function categories(state=INITIAL_STATE, action) {
@@ -15,10 +11,10 @@ export default function categories(state=INITIAL_STATE, action) {
 				...state,
 				allCategories: action.categories
 			}
-		case SET_ACTIVE_CATEGORY:
+		case SET_SELECTED_CATEGORY:
 			return {
 				...state,
-				activeCategory: action.activeCategory
+				selectedCategory: action.category
 			}
 		default:
 			return state
