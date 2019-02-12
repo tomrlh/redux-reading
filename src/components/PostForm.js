@@ -13,38 +13,26 @@ class PostForm extends React.Component {
 		isSaved: false
 	}
 
-	isFormValid = () => {
-		if(this.state.title !== '' &&
-			this.state.author !== '' &&
-			this.state.body !== '' &&
-			this.state.category !== '')
-			return true
-		else
-			return false
-	}
-
 	handleDismiss = () => {
     	this.setState({ isSaved: false })
 	}
 
 	formatAndSavePost = () => {
-		if(this.isFormValid()) {
-			this.setState({ isSaving: true, isSaved: false })
-			let post = this.state
+		this.setState({ isSaving: true, isSaved: false })
+		let post = this.state
 
-			post.timestamp = new Date().getTime()
-			post.id = post.author + post.timestamp
+		post.timestamp = new Date().getTime()
+		post.id = post.author + post.timestamp
 
-			this.props.savePost(post)
-			this.setState({
-				title: '',
-				author: '',
-				body: '',
-				category: '',
-				isSaving: false,
-				isSaved: true
-			})
-		}
+		this.props.savePost(post)
+		this.setState({
+			title: '',
+			author: '',
+			body: '',
+			category: '',
+			isSaving: false,
+			isSaved: true
+		})
 	}
 
 	render() {
@@ -62,6 +50,7 @@ class PostForm extends React.Component {
 			<Form
 				loading={this.state.isSaving}
 				success={this.state.isSaved}
+				onSubmit={() => {this.formatAndSavePost()}}
 			>
 				<Message
 					success
@@ -109,7 +98,6 @@ class PostForm extends React.Component {
 					positive
 					icon='check'
 					content='Create Post'
-					onClick={() => {this.formatAndSavePost()}}
 				/>
 			</Form>
 		);
