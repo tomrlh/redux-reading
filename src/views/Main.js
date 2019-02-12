@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Button, Container, Divider, Grid, Item } from 'semantic-ui-react'
+import { Button, Container, Divider, Grid, Header, Item } from 'semantic-ui-react'
 import Categories from '../components/Categories'
 import PostSmall from '../components/PostSmall'
 import EditPostModal from '../components/EditPostModal'
@@ -37,14 +37,21 @@ class Main extends React.Component {
 									id={p.id}
 									title={p.title}
 									body={p.body}
+									author={p.author}
 									category={p.category}
 									voteScore={p.voteScore}
+
 									timestamp={p.timestamp}
 									editModalFlag={this.state.isEditing}
 								/>
 							)}
+
+							{postsToShow.length <= 0 &&
+								<Header as='h4'>No posts to show here.</Header>
+							}
 						</Item.Group>
 					</Grid.Column>
+
 
 					<Grid.Column width={4}>
 						<PostsSorter/>

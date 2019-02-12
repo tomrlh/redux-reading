@@ -3,7 +3,7 @@ export const UP_VOTE_POST = 'UP_VOTE_POST'
 export const DOWN_VOTE_POST = 'DOWN_VOTE_POST'
 export const SET_POSTS = 'SET_POSTS'
 export const SET_POST_DETAILS = 'SET_POST'
-export const TOGGLE_ISEDITINGPOST = 'TOGGLE_ISEDITINGPOST'
+export const SET_IS_EDITING_POST = 'SET_IS_EDITING_POST'
 export const SORT_BY_VOTES = 'SORT_BY_VOTES'
 export const SORT_BY_TITLE = 'SORT_BY_TITLE'
 export const SORT_BY_DATE = 'SORT_BY_DATE'
@@ -12,7 +12,7 @@ export const setPosts = posts => ({ type: SET_POSTS, posts })
 
 export const setPostDetails = postDetails => ({ type: SET_POST_DETAILS, postDetails })
 
-export const toggleIsEditingPost = () => ({ type: TOGGLE_ISEDITINGPOST })
+export const setIsEditingPost = (flag) => ({ type: SET_IS_EDITING_POST, flag })
 
 export const upVotePost = id => ({ type: UP_VOTE_POST, id })
 
@@ -38,7 +38,10 @@ export const fetchPosts = () => dispatch => (
 export const savePost = (post) => dispatch => (
 	ApiUtil
 		.savePost(post)
-		.then(response => dispatch(setPostDetails(response.data)))
+		.then(response => {
+			dispatch(setPostDetails(response.data))
+			dispatch(fetchPosts())
+		})
 		.catch(error => {console.log(error)})
 )
 

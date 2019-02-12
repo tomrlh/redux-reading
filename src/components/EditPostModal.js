@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Button, Form, Input, Message, Modal } from 'semantic-ui-react'
-import { toggleIsEditingPost } from '../actions/posts'
+import { setIsEditingPost } from '../actions/posts'
 import PostForm from './PostForm'
 
 class EditPostModal extends React.Component {
@@ -15,15 +15,12 @@ class EditPostModal extends React.Component {
 			<Modal
 				size='large' closeIcon
 				open={this.props.isEditingPost}
-				onClose={() => this.props.toggleIsEditingPost()}>
-				<Modal.Header>Delete Your Account</Modal.Header>
+				onClose={() => this.props.setIsEditingPost(false)}>
+				<Modal.Header>Editing Post</Modal.Header>
 				<Modal.Content>
-					<PostForm/>
+					<PostForm editingPost={this.props.postDetails}/>
+					<br/><br/>
 				</Modal.Content>
-				<Modal.Actions>
-					<Button negative>No</Button>
-					<Button positive icon='checkmark' labelPosition='right' content='Yes' />
-				</Modal.Actions>
 			</Modal>
 		);
 	}
@@ -32,14 +29,17 @@ class EditPostModal extends React.Component {
 
 
 function mapStateToProps(state, ownProps) {
-	return { isEditingPost: state.posts.isEditingPost }
+	return {
+		isEditingPost: state.posts.isEditingPost,
+		postDetails: state.posts.postDetails
+	}
 }
 
 
 
 function mapDispatchToProps(dispatch) {
 	return {
-		toggleIsEditingPost: () => dispatch(toggleIsEditingPost())
+		setIsEditingPost: (flag) => dispatch(setIsEditingPost(flag))
 	}
 }
 

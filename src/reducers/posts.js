@@ -3,7 +3,7 @@ import {
 	DOWN_VOTE_POST,
 	SET_POSTS,
 	SET_POST_DETAILS,
-	TOGGLE_ISEDITINGPOST,
+	SET_IS_EDITING_POST,
 	SORT_BY_VOTES,
 	SORT_BY_TITLE,
 	SORT_BY_DATE
@@ -11,7 +11,7 @@ import {
 
 const INITIAL_STATE = {
   allPosts: [],
-  post: {},
+  postDetails: {},
   isEditingPost: false
 }
 
@@ -49,10 +49,10 @@ export default function posts(state=INITIAL_STATE, action) {
 				...state,
 				postDetails: action.postDetails
 			}
-		case TOGGLE_ISEDITINGPOST:
+		case SET_IS_EDITING_POST:
 			return {
 				...state,
-				isEditingPost: !state.isEditingPost
+				isEditingPost: action.flag
 			}
 		case SORT_BY_VOTES:
 			return {

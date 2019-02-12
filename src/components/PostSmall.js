@@ -37,6 +37,7 @@ class PostSmall extends React.Component {
 						<PostControls
 							id={this.props.id}
 							title={this.props.title}
+							author={this.props.author}
 							body={this.props.body}
 							category={this.props.category}
 							voteScore={this.props.voteScore}

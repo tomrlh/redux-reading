@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Icon, Item, Label } from 'semantic-ui-react'
 import VoteScore from './VoteScore'
-import { toggleIsEditingPost } from '../actions/posts'
+import { setIsEditingPost, setPostDetails } from '../actions/posts'
 
 class PostControls extends React.Component {
 	render() {
@@ -11,7 +11,17 @@ class PostControls extends React.Component {
 				<Item.Extra>
 					<Icon color='green' name='check'/> {this.props.voteScore} <span style={{marginRight: '5px'}}>votes</span>
 
-					<Label as='a' onClick={() => {this.props.toggleIsEditingPost()}}>
+					<Label as='a' onClick={() => {
+						this.props.setIsEditingPost(true)
+						this.props.setPostDetails({
+							id: this.props.id,
+							title: this.props.title,
+							author: this.props.author,
+							body: this.props.body,
+							category: this.props.category,
+							voteScore: this.props.voteScore
+						})
+					}}>
 						<Icon name='edit' /> Edit
 					</Label>
 
@@ -39,7 +49,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		toggleIsEditingPost: () => dispatch(toggleIsEditingPost())
+		setIsEditingPost: flag => dispatch(setIsEditingPost(flag)),
+		setPostDetails: post => dispatch(setPostDetails(post))
 	}
 }
 

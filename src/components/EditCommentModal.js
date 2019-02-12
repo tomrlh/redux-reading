@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Form, Input, Message, Modal } from 'semantic-ui-react'
+import { Button, Form, Input, Modal } from 'semantic-ui-react'
 
 export default class EditCommentModal extends React.Component {
 	state = {
@@ -47,20 +47,17 @@ export default class EditCommentModal extends React.Component {
 			>
 				<Modal.Header>Editing comment</Modal.Header>
 
-				<Message color='yellow' hidden={this.state.hideAuthorAlert}>The author must have a name.</Message>
-				<Message color='yellow' hidden={this.state.hideBodyAlert}>The comment must have some content.</Message>
-
 				<Modal.Content>
 					<Form>
 						<Input
-							icon='user' iconPosition='left'
+							icon='user' iconPosition='left' required
 							defaultValue={this.props.comment.author}
 							placeholder='Your name...' style={{marginBottom: '5px'}}
 							onChange={(e, { value }) => this.setState({author: value})}
 						/>
 						<br/>
 						<Form.TextArea placeholder='Type something...'
-							defaultValue={this.props.comment.body}
+							defaultValue={this.props.comment.body} required
 							onChange={(e, { value }) => this.setState({body: value})}
 						/>
 					</Form>

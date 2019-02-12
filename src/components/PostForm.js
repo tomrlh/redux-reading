@@ -22,10 +22,14 @@ class PostForm extends React.Component {
 		let post = this.state
 
 		post.timestamp = new Date().getTime()
-		post.id = post.author + post.timestamp
+		if(this.props.editingPost)
+			post.id = this.props.editingPost.id
+		else
+			post.id = post.author + post.timestamp
 
 		this.props.savePost(post)
 		this.setState({
+			id: '',
 			title: '',
 			author: '',
 			body: '',
@@ -62,6 +66,7 @@ class PostForm extends React.Component {
 					id='form-input-control-first-name'
 					control={Input} required
 					label='Post Title'
+					defaultValue={this.props.editingPost.title}
 					placeholder='Name your post...'
 					onChange={(e, { value }) => this.setState({title: value})}
 				/>
@@ -70,6 +75,7 @@ class PostForm extends React.Component {
 						id='form-input-control-last-name'
 						control={Input} required
 						label='Author'
+						defaultValue={this.props.editingPost.author}
 						placeholder='Fill with your name...'
 						onChange={(e, { value }) => this.setState({author: value})}
 					/>
@@ -77,6 +83,7 @@ class PostForm extends React.Component {
 						control={Select} required
 						options={categoryOptions}
 						label='Category' search
+						defaultValue={this.props.editingPost.category}
 						placeholder='Select a category...'
 						searchInput={{ id: 'form-select-control-gender' }}
 						onChange={(e, { value }) => this.setState({category: value})}
@@ -88,6 +95,7 @@ class PostForm extends React.Component {
 					id='form-textarea-control-opinion'
 					control={TextArea} required
 					label='Content of your post'
+					defaultValue={this.props.editingPost.body}
 					placeholder='Write your awesome post here...'
 					onChange={(e, { value }) => this.setState({body: value})}
 				/>
@@ -97,7 +105,7 @@ class PostForm extends React.Component {
 					floated='right'
 					positive
 					icon='check'
-					content='Create Post'
+					content='Save Post'
 				/>
 			</Form>
 		);
@@ -108,7 +116,8 @@ class PostForm extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		categories: state.categories.allCategories
+		categories: state.categories.allCategories,
+		isEditingPost: state.posts.isEditingPost
 	}
 }
 
