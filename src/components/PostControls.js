@@ -29,7 +29,9 @@ class PostControls extends React.Component {
 						<Icon name='edit' /> Edit
 					</Label>
 
-					<Label as='a' onClick={() => {this.props.deleteAction(this.props.id)}}>
+					<Label as='a' onClick={() => {
+						this.props.deleteAction(this.props.id)
+					}}>
 						<Icon name='trash alternate outline' /> Delete
 					</Label>
 

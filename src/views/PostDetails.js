@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Button, Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
 import PostComments from '../components/PostComments'
-import VoteScore from '../components/VoteScore'
-import { fetchPost, fetchUpVote, fetchDownVote } from '../actions/posts'
+import PostControls from '../components/PostControls'
+import EditPostModal from '../components/EditPostModal'
+import { fetchPost, fetchUpVote, fetchDownVote, deletePost } from '../actions/posts'
 
 class PostDetails extends Component {
+	state ={
+		isEditing: false
+	}
+
 	render() {
 		let formatedDate = new Date(this.props.postDetails.timestamp).toLocaleDateString('pt-BR')
 		let post = this.props.postDetails
-
+		console.log(post)
 		return (
 			<Container className='containerStyle'>
 				<Grid columns='equal'>
@@ -24,26 +29,42 @@ class PostDetails extends Component {
 					</Grid.Column>
 
 					<Grid.Column width={8}>
-						<Header as='h5' textAlign='right'></Header>
-						<Header as='h2'>{post.title}</Header>
-						<span>
-							<Icon name='user' /> {post.author} |
-						 	<Icon name='calendar alternate' />{formatedDate}
-						 </span>
-						<Divider />
-						<p>{post.body}</p>
-						<Divider />
-						<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {this.props.postDetails.voteScore}
-						<VoteScore
-							id={post.id}
-							upVote={this.props.upVote}
-							downVote={this.props.downVote}
-						/>
-						<br/><br/>
-						<PostComments parentId={this.props.match.params.id}/>
+						{!post.deleted &&
+						<div>
+							<Header as='h5' textAlign='right'></Header>
+							<Header as='h2'>{post.title}</Header>
+							<span>
+								<Icon name='user' /> {post.author} |
+							 	<Icon name='calendar alternate' />{formatedDate}
+							 </span>
+							<Divider />
+							<p>{post.body}</p>
+							<Divider />
+							<PostControls
+								id={post.id}
+								title={post.title}
+								author={post.author}
+								body={post.body}
+								category={post.category}
+								voteScore={post.voteScore}
+								commentCount={post.commentCount}
+								timestamp={post.timestamp}
+
+								deleteAction={this.props.deletePost}
+								upVote={this.props.upVote}
+								downVote={this.props.downVote}
+							/>
+							<br/><br/>
+							<PostComments parentId={this.props.match.params.id}/>
+						</div>
+						}
+						{post.deleted &&
+							<Header as='h4' textAlign='right'>This post was deleted.</Header>
+						}
 					</Grid.Column>
 					<Grid.Column width={4}></Grid.Column>
 				</Grid>
+				<EditPostModal/>
 			</Container>
 		);
 	}
@@ -87,6 +108,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
 	return {
 		fetchPost: (id) => dispatch(fetchPost(id)),
+		deletePost: (id) => dispatch(deletePost(id)),
 		upVote: (id) => dispatch(fetchUpVote(id)),
 		downVote: (id) => dispatch(fetchDownVote(id))
 	}

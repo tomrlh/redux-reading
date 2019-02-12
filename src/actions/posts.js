@@ -50,7 +50,10 @@ export const savePost = (post) => dispatch => (
 export const deletePost = (id) => dispatch => (
 	ApiUtil
 		.deletePost(id)
-		.then(response => dispatch(fetchPosts()))
+		.then(response => {
+			dispatch(fetchPosts())
+			dispatch(setPostDetails(response.data))
+		})
 		.catch(error => {console.log(error)})
 )
 
