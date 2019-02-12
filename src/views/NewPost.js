@@ -1,17 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Container, Grid } from 'semantic-ui-react'
 import PostForm from '../components/PostForm'
 import { fetchCategories } from '../actions/categories'
 
 class NewPost extends React.Component {
 	render() {
 		return (
-			<Container>
+			<Container className='containerStyle'>
 				<Grid columns='equal'>
-					<Grid.Column width={4}></Grid.Column>
+					<Grid.Column width={4}>
+					<Link to={'/'}>
+						<Button fluid icon='arrow alternate circle left' color='blue'>
+							Return to Main Page
+						</Button>
+					</Link>
+					</Grid.Column>
 
-					<Grid.Column width={10}>
+					<Grid.Column width={8}>
 						<PostForm/>
 					</Grid.Column>
 

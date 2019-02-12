@@ -3,23 +3,12 @@ import { Button, Form, Header, Input, Message } from 'semantic-ui-react'
 
 export default class CommentForm extends React.Component {
 	state = {
-		hideAuthorAlert: true,
-		hideBodyAlert: true,
 		author: '',
-		body: '',
+		body: ''
 	}
 
 	formatAndAddComment = () => {
 		let comment = {}
-
-		if(this.state.author.length === 0) {
-			this.setState({hideAuthorAlert: false})
-			return
-		} else this.setState({hideAuthorAlert: true})
-		if(this.state.body.length === 0) {
-			this.setState({hideBodyAlert: false})
-			return
-		} else this.setState({hideBodyAlert: true})
 
 		comment.timestamp = new Date().getTime()
 		comment.parentId = this.props.parentId
@@ -32,13 +21,10 @@ export default class CommentForm extends React.Component {
 
 	render() {
 		return (
-			<Form reply>
+			<Form reply onSubmit={() => {this.formatAndAddComment()}}>
 				<Header as='h3' dividing>
 					Comment here
 				</Header>
-
-				<Message color='yellow' hidden={this.state.hideAuthorAlert}>The author must have a name.</Message>
-				<Message color='yellow' hidden={this.state.hideBodyAlert}>The comment must have some content.</Message>
 
 				<Input
 					icon='user' iconPosition='left'
@@ -51,7 +37,6 @@ export default class CommentForm extends React.Component {
 				<Button
 					content='Add Comment' icon='edit'
 					labelPosition='left' primary
-					onClick={() => {this.formatAndAddComment()}}
 				/>
 			</Form>
 		);

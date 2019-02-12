@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Container, Divider, Header, Icon } from 'semantic-ui-react'
+import { Button, Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
 import PostComments from '../components/PostComments'
 
 import { fetchPost } from '../actions/posts'
@@ -12,19 +13,32 @@ class PostDetail extends Component {
 		let post = this.props.postDetails
 
 		return (
-			<Container text>
-				<Header as='h5' textAlign='right'></Header>
-				<Header as='h2'>{post.title}</Header>
-				<span>
-					<Icon name='user' /> {post.author} |
-				 	<Icon name='calendar alternate' />{formatedDate}
-				 </span>
-				<Divider />
-				<p>{post.body}</p>
-				<Divider />
-				<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {post.voteScore}
-				<br/><br/>
-				<PostComments parentId={this.props.match.params.id}/>
+			<Container className='containerStyle'>
+				<Grid columns='equal'>
+					<Grid.Column width={4}>
+					<Link to={'/'}>
+						<Button fluid icon='arrow alternate circle left' color='blue'>
+							Return to Main Page
+						</Button>
+					</Link>
+					</Grid.Column>
+
+					<Grid.Column width={8}>
+						<Header as='h5' textAlign='right'></Header>
+						<Header as='h2'>{post.title}</Header>
+						<span>
+							<Icon name='user' /> {post.author} |
+						 	<Icon name='calendar alternate' />{formatedDate}
+						 </span>
+						<Divider />
+						<p>{post.body}</p>
+						<Divider />
+						<Icon name='thumbs up' color={post.voteScore>=0 ? 'green' : 'orange'} /> {post.voteScore}
+						<br/><br/>
+						<PostComments parentId={this.props.match.params.id}/>
+					</Grid.Column>
+					<Grid.Column width={4}></Grid.Column>
+				</Grid>
 			</Container>
 		);
 	}

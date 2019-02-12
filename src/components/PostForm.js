@@ -13,9 +13,7 @@ class PostForm extends React.Component {
 		isSaved: false
 	}
 
-	handleDismiss = () => {
-    	this.setState({ isSaved: false })
-	}
+	handleDismiss = () => {this.setState({ isSaved: false })}
 
 	formatAndSavePost = () => {
 		this.setState({ isSaving: true, isSaved: false })
@@ -66,7 +64,6 @@ class PostForm extends React.Component {
 					id='form-input-control-first-name'
 					control={Input} required
 					label='Post Title'
-					defaultValue={this.props.editingPost.title}
 					placeholder='Name your post...'
 					onChange={(e, { value }) => this.setState({title: value})}
 				/>
@@ -75,7 +72,6 @@ class PostForm extends React.Component {
 						id='form-input-control-last-name'
 						control={Input} required
 						label='Author'
-						defaultValue={this.props.editingPost.author}
 						placeholder='Fill with your name...'
 						onChange={(e, { value }) => this.setState({author: value})}
 					/>
@@ -83,7 +79,6 @@ class PostForm extends React.Component {
 						control={Select} required
 						options={categoryOptions}
 						label='Category' search
-						defaultValue={this.props.editingPost.category}
 						placeholder='Select a category...'
 						searchInput={{ id: 'form-select-control-gender' }}
 						onChange={(e, { value }) => this.setState({category: value})}
@@ -95,7 +90,6 @@ class PostForm extends React.Component {
 					id='form-textarea-control-opinion'
 					control={TextArea} required
 					label='Content of your post'
-					defaultValue={this.props.editingPost.body}
 					placeholder='Write your awesome post here...'
 					onChange={(e, { value }) => this.setState({body: value})}
 				/>

@@ -56,11 +56,6 @@ class Main extends React.Component {
 					<Grid.Column width={4}>
 						<PostsSorter/>
 						<Divider/>
-
-						<h4>Search field post here</h4>
-
-						<Divider/>
-
 						<Link to={'/add-post'}>
 							<Button fluid icon='add' content='Add new post' color='green'/>
 						</Link>
