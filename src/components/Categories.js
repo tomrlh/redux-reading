@@ -33,9 +33,11 @@ class Categories extends Component {
 						<Label color='teal'>{this.props.allPosts.length}</Label>All
 					</Menu.Item>
 					{this.props.categories.map((c, idx) =>
-						<Link to={`/${c.name}`}>
+						<Link to={`/${c.name}`} key={idx}>
 							<Menu.Item
-								key={idx} name={c.name}
+								link={false}
+								icon={true}
+								name={c.name}
 								active={this.state.activeItem === c.name}
 								onClick={() => {
 									this.handleItemClick(c.name)

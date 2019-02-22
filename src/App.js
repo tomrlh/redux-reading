@@ -15,9 +15,9 @@ class App extends Component {
 				<div className="App">
 				<Switch>
 					<Route path='/' exact={true} component={Main} />
-					<Route path='/:category' component={Main}/>
+					<Route path='/:category' exact={true} component={Main}/>
 					<Route path='/:category/:id' exact={true} component={PostDetails} />
-					<Route path='/add-post/' exact={true} component={NewPost} />
+					<Route path='/posts/add/new' exact={true} component={NewPost} />
 				</Switch>
 				</div>
 			</HashRouter>

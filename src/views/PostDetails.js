@@ -29,34 +29,34 @@ class PostDetails extends Component {
 					</Grid.Column>
 
 					<Grid.Column width={8}>
-						{!post.deleted &&
-						<div>
-							<Header as='h5' textAlign='right'></Header>
-							<Header as='h2'>{post.title}</Header>
-							<span>
-								<Icon name='user' /> {post.author} |
-							 	<Icon name='calendar alternate' />{formatedDate}
-							 </span>
-							<Divider />
-							<p>{post.body}</p>
-							<Divider />
-							<PostControls
-								id={post.id}
-								title={post.title}
-								author={post.author}
-								body={post.body}
-								category={post.category}
-								voteScore={post.voteScore}
-								commentCount={post.commentCount}
-								timestamp={post.timestamp}
+						{post && !post.deleted &&
+							<div>
+								<Header as='h5' textAlign='right'></Header>
+								<Header as='h2'>{post.title}</Header>
+								<span>
+									<Icon name='user' /> {post.author} |
+								 	<Icon name='calendar alternate' />{formatedDate}
+								 </span>
+								<Divider />
+								<p>{post.body}</p>
+								<Divider />
+								<PostControls
+									id={post.id}
+									title={post.title}
+									author={post.author}
+									body={post.body}
+									category={post.category}
+									voteScore={post.voteScore}
+									commentCount={post.commentCount}
+									timestamp={post.timestamp}
 
-								deleteAction={this.props.deletePost}
-								upVote={this.props.upVote}
-								downVote={this.props.downVote}
-							/>
-							<br/><br/>
-							<PostComments parentId={this.props.match.params.id}/>
-						</div>
+									deleteAction={this.props.deletePost}
+									upVote={this.props.upVote}
+									downVote={this.props.downVote}
+								/>
+								<br/><br/>
+								<PostComments parentId={this.props.match.params.id}/>
+							</div>
 						}
 						{post.deleted &&
 							<Header as='h4' textAlign='right'>This post was deleted.</Header>
