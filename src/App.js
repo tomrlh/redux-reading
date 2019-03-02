@@ -5,6 +5,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 
 import Main from './views/Main'
 import PostDetails from './views/PostDetails'
+import NoMatch from './views/NoMatch'
 import NewPost from './views/NewPost'
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
 					<Route path='/:category' exact={true} component={Main}/>
 					<Route path='/:category/:id' exact={true} component={PostDetails} />
 					<Route path='/posts/add/new' exact={true} component={NewPost} />
+					<Route component={NoMatch} />
 				</Switch>
 				</div>
 			</HashRouter>
