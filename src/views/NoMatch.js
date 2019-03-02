@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Container, Divider, Grid, Header, Icon } from 'semantic-ui-react'
+import { Button, Container, Grid } from 'semantic-ui-react'
 
 export default class NoMatch extends Component {
 	render() {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Comment, Header } from 'semantic-ui-react'
-import { fetchPostComments, saveComment, deleteComment } from '../actions/comments'
+import { fetchPostComments, saveComment, deleteComment, fetchUpVoteComment, fetchDownVoteComment } from '../actions/comments'
 import CommentForm from './CommentForm'
 import EditCommentModal from './EditCommentModal'
 import CommentControls from './CommentControls'
@@ -49,6 +49,8 @@ class PostComments extends Component {
 										comment={c}
 										editAction={this.show}
 										deleteAction={this.props.deleteComment}
+										fetchUpVoteComment={this.props.fetchUpVoteComment}
+										fetchDownVoteComment={this.props.fetchDownVoteComment}
 									/>
 								</Comment.Actions>
 							</Comment.Content>
@@ -109,7 +111,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		fetchPostComments: (id) => dispatch(fetchPostComments(id)),
 		saveComment: (comment) => dispatch(saveComment(comment)),
-		deleteComment: (id) => dispatch(deleteComment(id))
+		deleteComment: (id) => dispatch(deleteComment(id)),
+		fetchUpVoteComment: (id) => dispatch(fetchUpVoteComment(id)),
+		fetchDownVoteComment: (id) => dispatch(fetchDownVoteComment(id))
 	}
 }
 
