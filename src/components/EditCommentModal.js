@@ -72,9 +72,9 @@ export default class EditCommentModal extends React.Component {
 
 
 
-EditCommentModal.propTypes = {
-	saveComment: PropTypes.function,
-	comment: PropTypes.object,
-	openFlag: PropTypes.boolean,
-	closeFunction: PropTypes.function
-}
+// EditCommentModal.propTypes = {
+// 	saveComment: PropTypes.function,
+// 	comment: PropTypes.object,
+// 	openFlag: PropTypes.boolean,
+// 	closeFunction: PropTypes.function
+// }
