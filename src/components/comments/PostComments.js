@@ -51,6 +51,7 @@ class PostComments extends Component {
 										deleteAction={this.props.deleteComment}
 										fetchUpVoteComment={this.props.fetchUpVoteComment}
 										fetchDownVoteComment={this.props.fetchDownVoteComment}
+										updateParent={this.props.updateParent}
 									/>
 								</Comment.Actions>
 							</Comment.Content>
@@ -66,6 +67,7 @@ class PostComments extends Component {
 					parentId={this.props.parentId}
 					saveComment={this.props.saveComment}
 					deleteComment={this.props.deleteComment}
+					updateParent={this.props.updateParent}
 				/>
 
 

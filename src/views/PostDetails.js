@@ -55,7 +55,7 @@ class PostDetails extends Component {
 									downVote={this.props.downVote}
 								/>
 								<br/><br/>
-								<PostComments parentId={this.props.match.params.id}/>
+								<PostComments parentId={this.props.match.params.id} updateParent={this.updateParent}/>
 							</div>
 						}
 						{post.deleted &&
@@ -80,6 +80,10 @@ class PostDetails extends Component {
 
 
 	componentDidMount() {
+		this.props.fetchPost(this.props.match.params.id)
+	}
+
+	updateParent = () => {
 		this.props.fetchPost(this.props.match.params.id)
 	}
 }

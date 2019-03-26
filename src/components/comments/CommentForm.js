@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Header, Input } from 'semantic-ui-react'
+import { fetchPost } from '../../actions/posts'
 
 export default class CommentForm extends React.Component {
 	state = {
@@ -17,6 +18,7 @@ export default class CommentForm extends React.Component {
 		comment.body = this.state.body
 
 		this.props.saveComment(comment)
+		this.props.updateParent()
 	}
 
 	render() {
