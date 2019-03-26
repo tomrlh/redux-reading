@@ -38,7 +38,7 @@ export const saveComment = (comment) => dispatch => (
 export const deleteComment = (id) => dispatch => (
 	ApiUtil
 		.deleteComment(id)
-		.then(response => dispatch(fetchPostComments()))
+		.then(response => dispatch(fetchPostComments(response.data.parentId)))
 		.catch(error => {console.log(error)})
 )
 
