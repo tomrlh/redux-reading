@@ -1,4 +1,5 @@
 import * as ApiUtil from '../utils/ApiUtil'
+import { fetchPost } from './posts'
 
 export const FETCH_POST_COMMENTS = 'FETCH_POST_COMMENTS'
 export const SET_POST_COMMENTS = 'SET_POST_COMMENTS'
@@ -29,7 +30,10 @@ export const fetchPostComments = (id) => dispatch => (
 export const saveComment = (comment) => dispatch => (
 	ApiUtil
 		.saveComment(comment)
-		.then(response => dispatch(fetchPostComments(response.data.parentId)))
+		.then(response => {
+			dispatch(fetchPostComments(response.data.parentId))
+			dispatch(fetchPost(response.data.parentId))
+		})
 		.catch(error => {console.log(error)})
 )
 
@@ -38,7 +42,10 @@ export const saveComment = (comment) => dispatch => (
 export const deleteComment = (id) => dispatch => (
 	ApiUtil
 		.deleteComment(id)
-		.then(response => dispatch(fetchPostComments(response.data.parentId)))
+		.then(response => {
+			dispatch(fetchPostComments(response.data.parentId))
+			dispatch(fetchPost(response.data.parentId))
+		})
 		.catch(error => {console.log(error)})
 )
 
