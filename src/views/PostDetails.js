@@ -29,7 +29,7 @@ class PostDetails extends Component {
 					</Grid.Column>
 
 					<Grid.Column width={8}>
-						{post && !post.deleted &&
+						{post && !post.deleted && post.id !== undefined &&
 							<div>
 								<Header as='h5' textAlign='right'></Header>
 								<Header as='h2'>{post.title}</Header>
@@ -58,8 +58,8 @@ class PostDetails extends Component {
 								<PostComments parentId={this.props.match.params.id} updateParent={this.updateParent}/>
 							</div>
 						}
-						{post.deleted &&
-							<Header as='h4' textAlign='right'>This post was deleted.</Header>
+						{post.deleted || post.id === undefined &&
+							<div><strong>Route not found.</strong></div>
 						}
 					</Grid.Column>
 					<Grid.Column width={4}></Grid.Column>
